@@ -12,22 +12,28 @@ Se diseñ\'o una fuente con las siguientes caracter\'isticas:
 \begin{tabular}{|l|l|l|l|l|}
 \hline
 \multicolumn{1}{|c|}{Grupo}  & $V_{i}$ & $V_{o}$  & $\frac{\Delta V_{o_{max}}}{V_o}$ & $f_{sw}$ \\ \hline
-3     						& 3.3V     & 5V  & 5\%   & 60kHz  \\ \hline
+3     						& 5V     & 3.3V  & 5\%   & 60kHz  \\ \hline
 \end{tabular}
 \label{tabla:datos de la fuente}
 \end{table} 
 
-Como se pide una tensi\'on de salida continua mayor que a la entrada, se utiliz\'o un convertidor boost. 
+
+
+Como se pide una tensi\'on de salida continua menos que a la entrada, se utiliz\'o un convertidor buck. 
+
 
 \begin{figure}[H]
   \centering
-    \includegraphics[scale = 0.5]{Imagenes/punto2/Circuito}
-  \caption{Convertidor Boost}
-  \label{fig:circuito pto 2}
+    \includegraphics[scale = 1]{Imagenes/punto2/Circuito}
+  \caption{Buck Converter}
+  \label{Circuito}
 \end{figure}
 
+
+
+
 Sabemos que el duty cycle en este convertidor esta dado por: 
-$$D_{ideal}=1-\frac{V_i}{V_o}=0.34$$
+$$D_{ideal}=\frac{V_o}{V_i}=0.66$$
 
 Con el valor del duty obtenemos el periodo de encendido de la llave $T_{on}=D T_s=D \frac{1}{f_{sw}}$
 
@@ -39,22 +45,22 @@ Para asegurarnos que estemos trabajando en modo continuo, elegimos una $I_{o}$ t
 \begin{tabular}{|l|l|}
 \hline
 \multicolumn{1}{|c|}{$L [\mu H]$} & {$I_{OB} [mA]$}    \\ \hline
-220                   & 14   \\ \hline
-330                   & 9,35 \\ \hline
+220                   & 42.5   \\ \hline
+
 \end{tabular}
 \caption{Calculo de $I_{OB}$ seg\'un el valor de $L$}
 \label{tabla:calculo de Iob}
 \end{table}
 
-Por lo tanto, suponiendo $I_o=50mA$, obtenemos una carga de $R=100\Omega$
+Por lo tanto, suponiendo $I_o=100mA$, obtenemos una carga de $R=33\Omega$
 
 
 
 El valor del capacitor se obtuvo con la siguiente formula:
-$$C=\frac{T_{on}}{R\frac{\Delta V_{o_{max}}}{V_o}}=1.13\mu F$$
+$$C=\frac{(1-D)T_{s}^{2}}{8L\frac{\Delta V_{o_{max}}}{V_o}}=1.073\mu F$$
 
-Para realizar las simulaci\'on se eligi\'o  $L=220\mu H$ y se obtuvo que: 
-$$D_{real}=0.43$$
+Para realizar las simulaci\'on tom\'o  $L=220\mu H$ y se obtuvo que: 
+$$D_{real}=0.72$$
 
 \subsection*{b)}
 
@@ -69,21 +75,21 @@ Se realiz\'o el gr\'afico de la señal de disparo (SW), tensión en el inductor 
 
 \subsection*{c)}
 
-A continuacion se mustra la simul\'on en LTspice las curvas del inciso anterior. 
+A continuacion se mustra la simulaci\'on en LTspice las curvas del inciso anterior. 
+
 
 \begin{figure}[H]
   \centering
-    \includegraphics[scale = 0.4]{Imagenes/punto2/SW&IL}
-  \caption{Simulaci\'on SW(azul) y IL(roja)}
-  \label{fig:SW&IL}
+    \includegraphics[scale = 0.6]{Imagenes/punto2/SW&VL}
+  \caption{Simulaci\'on SW(roja) y VL(azul)}
+  \label{fig:SW&VL}
 \end{figure}
 
-
 \begin{figure}[H]
   \centering
-    \includegraphics[scale = 0.4]{Imagenes/punto2/SW&VL}
-  \caption{Simulaci\'on SW(azul) y VL(roja)}
-  \label{fig:SW&VL}
+    \includegraphics[scale = 0.6]{Imagenes/punto2/SW&IL}
+  \caption{Simulaci\'on SW(azul) y IL(verde)}
+  \label{fig:SW&IL}
 \end{figure}
 
 
