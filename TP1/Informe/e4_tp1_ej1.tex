@@ -2,5 +2,104 @@
 \begin{document}
 
 \section{Disparo de un transistor MOSFET}
+
+Para el circuito de disparo propuesto se utilizó un valor de $V_{gg}=10V$, y los datos del transistor se fueron obteniendo de la hoja de datos del IRF530 provista por Vishay, como se irá mostrando en el desarrollo.
+
+\todo[inline]{Poner dibujo del circuito}
+
+\subsection*{a)}
+
+Para el momento en el que el transistor está conduciendo, se calcula el valor de $I_o$ considerando en régimen estacionario solo la resistencia:
+
+\[
+I_o = \frac{Vd}{R2} = 0.33A
+\]
+
+Con dicho valor de $I_o$, se busca en la hoja de datos del transistor la curva $I_d(V_{gs})$, para obtener la $V_{gsIo}$ (el valor de $V_{gs}$ para el cual el canal conduce $I_o$):
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Images/Ej1-VgsIo.png}
+\end{figure}
+
+De donde se obtiene:
+
+\[
+V_{gsTh} = 4V \hspace{2cm} V_{gsIo} = 4.4V
+\]
+
+Cuando el canal no conduce, el valor de $V_{ds} = V2 = 50V$. Con dicho valor se busca en la hoja de datos el valor de la capacidad $C_{gs} + C_{gd1}$, que se encuentra como $C_{iss}$, de la curva $C(V_{ds})$:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Images/Ej1-Capacidades.png}
+\end{figure}
+
+De donde se obtiene que:
+
+\[
+C_{gs} + C_{gd1} = 650pF
+\]
+
+Con lo que podemos obtener $\tau_1$.
+
+\[
+\tau_1 = R_g \cdot (C_{gs} + C_{gd1}) = 65nS
+\]
+
+Planteando entonces la curva de $V_{gs}(t)$ para el tramo de encendido hasta que toma el valor de $V_{gsIo}$:
+
+\[
+V_{gs} = V_{gg} \cdot (1 - e^{-\frac{t}{\tau_1}})
+\]
+
+Despejando $t$, con $V_{gsTh}$ obtenemos el valor de $t_d$, es decir el tiempo en que tarda en llegar a la tensión de threshold. Y con $V_{gsIo}$ el tiempo en llegar hasta el valor de tensión para la cual el canal puede conducir $I_o$, $t_1 = t_d + t_{ri}$:
+
+\[
+t_d = -\tau_1 \cdot Ln\left( 1 - \frac{V_{gsTh}}{V_{gg}} \right) = 33,2nS
+\]
+
+\[
+t_1 = -\tau_1 \cdot Ln\left( 1 - \frac{V_{gsIo}}{V_{gg}} \right) = 37.7nS
+\]
+
+Por lo que el valor de $t_{ri}$ (tiempo que tarda el subir $I_d$ hasta llegar a $I_o$) se obtiene por diferencia:
+
+\[
+t_{ri} = t_1 - t_d = 4.5nS
+\]
+
+Durante el tiempo que $V_{gs}$ se mantiene constante (que es cuando disminuye el valor de $V_{ds}$), la corriente de Gate ($I_g$) se mantiene constante, debido a la ley de Ohm con la resistencia $R_g$:
+
+\[
+I_g = \frac{V_{gg} - V_{gsIo}}{R_g} = 56mA
+\] 
+
+Dado que la corriente se mantiene constante, podemos obtener la variación de carga en Gate ($\Delta Q$) durante ese tiempo de la curva $V_{gs}(Q_g)$ provista por la hoja de datos, entrando con el valor de $V_{gsIo}$:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\linewidth]{Images/Ej1-GateCharge.png}
+\end{figure}
+
+De donde se obtiene que el $\Delta_Q = 6nC$. Sabiendo que la corriente es variación de la carga en el tiempo, podemos despejar el tiempo de caída de $V_{ds}$:
+
+\[
+I_g = \frac{\Delta Q}{\Delta t} \Longrightarrow t_{fv} = \frac{\Delta Q}{I_g} = 107nS
+\]
+
+Cuando el canal conduce $I_o$, el valor de $V_{ds}$ es $V_{ds-ON} = I_d \cdot R_{ds-ON} = 0.8V$. Con esto último, el valor de la capacidad resulta (aproximadamente):
+
+\[
+C_{gs} + C_{gd2} = 1150pF
+\]
+
+Por lo que podemos obtener $\tau_2$:
+
+\[
+\tau_2 = R_g \cdot (C_{gs} + C_{gd2}) = 115nS
+\]
+
+
 \newpage
 \end{document}
