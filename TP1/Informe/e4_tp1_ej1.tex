@@ -53,10 +53,10 @@ Planteando entonces la curva de $V_{gs}(t)$ para el tramo de encendido hasta que
 V_{gs} = V_{gg} \cdot (1 - e^{-\frac{t}{\tau_1}})
 \]
 
-Despejando $t$, con $V_{gsTh}$ obtenemos el valor de $t_d$, es decir el tiempo en que tarda en llegar a la tensión de threshold. Y con $V_{gsIo}$ el tiempo en llegar hasta el valor de tensión para la cual el canal puede conducir $I_o$, $t_1 = t_d + t_{ri}$:
+Despejando $t$, con $V_{gsTh}$ obtenemos el valor de $t_d(ON)$, es decir el tiempo en que tarda en llegar a la tensión de threshold. Y con $V_{gsIo}$ el tiempo en llegar hasta el valor de tensión para la cual el canal puede conducir $I_o$, $t_1 = t_d(ON) + t_{ri}$:
 
 \[
-t_d = -\tau_1 \cdot Ln\left( 1 - \frac{V_{gsTh}}{V_{gg}} \right) = 33,2nS
+t_d(ON) = -\tau_1 \cdot Ln\left( 1 - \frac{V_{gsTh}}{V_{gg}} \right) = 33,2nS
 \]
 
 \[
@@ -66,7 +66,7 @@ t_1 = -\tau_1 \cdot Ln\left( 1 - \frac{V_{gsIo}}{V_{gg}} \right) = 37.7nS
 Por lo que el valor de $t_{ri}$ (tiempo que tarda el subir $I_d$ hasta llegar a $I_o$) se obtiene por diferencia:
 
 \[
-t_{ri} = t_1 - t_d = 4.5nS
+t_{ri} = t_1 - t_d(ON)= 4.5nS
 \]
 
 Durante el tiempo que $V_{gs}$ se mantiene constante (que es cuando disminuye el valor de $V_{ds}$), la corriente de Gate ($I_g$) se mantiene constante, debido a la ley de Ohm con la resistencia $R_g$:
@@ -100,6 +100,27 @@ Por lo que podemos obtener $\tau_2$:
 \tau_2 = R_g \cdot (C_{gs} + C_{gd2}) = 115nS
 \]
 
+Para el apagado, se plantea la curva de $V_{gs}(t)$ para el tramo que va desde el máximo ($V_{gg}$) hasta $V_{gsIo}$, despejando el tiempo que demora, $t_d(OFF)$:
 
+\[
+V_{gsIo} = V_{gg} \cdot e^{-\frac{t}{\tau_2}} \Longrightarrow t_d(OFF) = -\tau_2 \cdot ln\left( \frac{V_{gsIo}}{V_{gg}} \right) = 141nS
+\]
+
+Para el tiempo que se mantiene $V_{gsIo}$ constante, es cuando aumenta la tensión $V_{ds}$, por lo que usando el valor de $\Delta Q$ hallado previamente se obtiene:
+
+\[
+\frac{V_{gsIo}}{R_g} = I_g = 44mA \Longrightarrow t_{rv} = \frac{\Delta Q}{I_g} = 136nS
+\]
+
+Y finalmente, el tiempo en que la corriente $I_d$ disminuye, se da entre que $V_{gs}$ pasa de $V_{gsIo}$ a $V_{gsTh}$:
+
+\[
+V_{gsTh} = V_{gsIo} \cdot e^{-\frac{t}{\tau_1}}
+\]
+
+\[
+t_{fi} = -\tau_1 \cdot Ln \left( \frac{V_{gsTh}}{V_{gsIo}}\right) = 6,2nS
+\]
+ 
 \newpage
 \end{document}
