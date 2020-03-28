@@ -1,0 +1,8 @@
+td=34ns
+tri=3.72ns
+tfv=327ns
+
+tiempos cuando bajo la fuente
+td(off)=135.8 ns
+trv=523 ns
+tfi=9.2 ns
