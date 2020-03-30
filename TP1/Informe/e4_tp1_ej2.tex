@@ -19,7 +19,7 @@ Se diseñ\'o una fuente con las siguientes caracter\'isticas:
 
 
 
-Como se pide una tensi\'on de salida continua menos que a la entrada, se utiliz\'o un convertidor buck. 
+Como se pide una tensi\'on de salida continua menor que a la entrada, se utiliz\'o un convertidor buck. 
 
 
 \begin{figure}[H]
@@ -60,7 +60,7 @@ El valor del capacitor se obtuvo con la siguiente formula:
 $$C=\frac{(1-D)T_{s}^{2}}{8L\frac{\Delta V_{o_{max}}}{V_o}}=1.073\mu F$$
 
 Para realizar las simulaci\'on tom\'o  $L=220\mu H$ y se obtuvo que: 
-$$D_{real}=0.72$$
+$$D_{real}=0.715$$
 
 \subsection*{b)}
 
@@ -68,14 +68,27 @@ Se realiz\'o el gr\'afico de la señal de disparo (SW), tensión en el inductor 
 
 \begin{figure}[H]
   \centering
-    \includegraphics[scale = 0.7]{Imagenes/punto2/Dibujo}
+    \includegraphics[scale = 0.6]{Imagenes/punto2/Dibujo}
   \caption{Gr\'afico las curvas de la topolog\'ia de convertidor boost}
   \label{fig:dibujo}
 \end{figure}
 
+
+Sabiendo que en este convertidor en particular la corriente media en el inductor es igual a la corriente media a la salida, podemos calcular la corriente m\'axima y m\'inima en el inductor como:
+
+$$I_{L_{max}}= I_o + \frac{\Delta I_L}{2}$$
+$$I_{L_{min}}= I_o - \frac{\Delta I_L}{2}$$
+
+Adem\'as, en r\'egimen permanente se cumple: $\Delta I_{L_{ON}}+\Delta I_{L_{OFF}}=0$ y $\Delta I_{L_{ON}}=\frac{(V_i-V_o)DT_s}{L}$.
+
+$$I_{L_{max}}= I_o + \frac{(V_i-V_o)D_{real}T_s}{L}=142.5mA$$
+$$I_{L_{min}}= I_o - \frac{(V_i-V_o)D_{real}T_s}{L}=53.6mA$$
+
+
+
 \subsection*{c)}
 
-A continuacion se mustra la simulaci\'on en LTspice las curvas del inciso anterior. 
+A continuaci\'on se muestra la simulaci\'on en LTspice de las curvas del inciso anterior tomando como tiempo de encendido de la llave a $T_{on}=D_{real}T_s$
 
 
 \begin{figure}[H]
@@ -102,6 +115,18 @@ A continuacion se mustra la simulaci\'on en LTspice las curvas del inciso anteri
 
 
 \subsection*{d)}
+
+En los c\'alculos que se realizaron en el inciso a) se consider\'o al diodo como ideal. Si tenemos en cuenta la ca\'ida del diodo cuando conduce, la tensi\'on en el inductor mientras $SW=OFF$ es $V_{L}=-V_o-0.7$. Adem\'as, debemos considerar el pico de corriente de reverse recovery cuando el diodo deja de conducir. 
+
+
+
+Como la tensi\'on $V_L$ se ve afectada por el comportamiento no ideal del diodo, tambi\'en se ver\'a afectada la $D_{ideal}$ calculada.
+Cuando realizamos la simulaci\'on con un $T_{on}=D_{ideal}T_s$, la tensi\'on de salida se encontraba por debajo de los 3.3V. Por dicho motivo, aumentamos $D$ hasta lograr la tensi\'on de salida deseada. 
+
+Considerando el ripple que nos agreg\'o la ESR del capacitor, obtuvimos que la $D$ que cumple con los requerimientos de nuestra fuente es $D_{real}=0.715$.
+
+
+
 
 
 
