@@ -63,7 +63,7 @@ Por lo tanto, suponiendo $I_o=100mA$, obtenemos una carga de $R=33\Omega$
 
 
 El valor del capacitor se obtuvo con la siguiente formula:
-$$C=\frac{(1-D).T_{s}^{2}}{8.L.\frac{\Delta V_{o_{max}}}{V_o}}=1.073\mu F$$
+$$C=\frac{(1-D) \cdot T_{s}^{2}}{8\cdot L\cdot \frac{\Delta V_{o_{max}}}{V_o}}=1.073\mu F$$
 
 Para realizar las simulaci\'on se tom\'o  $L=220\mu H$ y se obtuvo que: 
 $$D_{real}=0.711$$
@@ -85,10 +85,10 @@ Sabiendo que en este convertidor en particular la corriente media en el inductor
 $$I_{L_{max}}= I_o + \frac{\Delta I_L}{2}$$
 $$I_{L_{min}}= I_o - \frac{\Delta I_L}{2}$$
 
-Adem\'as, en r\'egimen permanente se cumple: $\Delta I_{L_{ON}}+\Delta I_{L_{OFF}}=0$ y $\Delta I_{L_{ON}}=\frac{(V_i-V_o)DT_s}{L}$.
+Adem\'as, en r\'egimen permanente se cumple: $\Delta I_{L_{ON}}+\Delta I_{L_{OFF}}=0$ y $\Delta I_{L_{ON}}=\frac{(V_i-V_o)\cdot D\cdot T_s}{L}$.
 
-$$I_{L_{max}}= I_o + \frac{(V_i-V_o)D_{real}T_s}{L}=142.5mA$$
-$$I_{L_{min}}= I_o - \frac{(V_i-V_o)D_{real}T_s}{L}=53.6mA$$
+$$I_{L_{max}}= I_o + \frac{(V_i-V_o)\cdot D_{real}\cdot T_s}{L}=142.5mA$$
+$$I_{L_{min}}= I_o - \frac{(V_i-V_o)\cdot D_{real}\cdot T_s}{L}=53.6mA$$
 
 
 
@@ -114,7 +114,7 @@ A continuaci\'on se muestra la simulaci\'on en LTspice de las curvas del inciso 
 
 \begin{figure}[H]
   \centering
-    \includegraphics[scale = 1]{Imagenes/punto2/PicodeIrr}
+    \includegraphics[scale=1]{Imagenes/punto2/PicodeIrr}
   \caption{Simulaci\'on IL(azul) y ID(verde)}
   \label{fig:IL&ID}
 \end{figure}
@@ -123,7 +123,7 @@ A continuaci\'on se muestra la simulaci\'on en LTspice de las curvas del inciso 
 
 \begin{figure}[H]
   \centering
-    \includegraphics[scale = 0.45]{Imagenes/punto2/Vo-D=0,711.PNG}
+    \includegraphics[scale = 0.457]{Imagenes/punto2/Vo-D=0,711.PNG}
   \caption{Simulaci\'on $V_o$ (azul)}
   \label{fig:IL&ID}
 \end{figure}
