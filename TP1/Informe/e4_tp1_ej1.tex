@@ -10,6 +10,8 @@ Para el circuito de disparo propuesto se utilizó un valor de $V_{gg}=10V$, y lo
 \includegraphics[width=0.7\linewidth]{Imagenes/Punto1/CircuitoDisparo.png}
 \end{figure}
 
+\subsection*{a) Cálculo teórico de los tiempos de conmutación}
+
 Para el momento en el que el transistor está conduciendo, se calcula el valor de $I_o$ considerando en régimen estacionario solo la resistencia:
 
 \[
@@ -134,6 +136,34 @@ t_{fi} = -\tau_1 \cdot Ln \left( \frac{V_{gsTh}}{V_{gsIo}}\right) = 6,2nS
 \includegraphics[width=0.8\linewidth]{Imagenes/Punto1/ApagadoTeorico.png}
 \caption{Curvas de apagado teórico}
 \end{figure}
+ 
+\subsection*{b) Curvas simuladas} 
+ 
+\begin{figure}[H]
+\centering
+%\includegraphics[width=0.95\linewidth]{Imagenes/Punto1/tiempo_encendido.png}
+\caption{Curvas de encendido simulado}
+\end{figure}
+
+De donde se tabulan los tiempos:
+
+\[
+t_d(ON) = 34nS \hspace{2cm} t_{ri} = 3.72nS \hspace{2cm} t_{fv} = 327nS
+\]
+
+\begin{figure}[H]
+\centering
+%\includegraphics[width=0.95\linewidth]{Imagenes/Punto1/tiempo_apagado.png}
+\caption{Curvas de apagado simulado}
+\end{figure}
+
+De donde se tabulan los tiempos:
+
+\[
+t_d(OFF) = 135.8nS \hspace{2cm} t_{rv} = 523nS \hspace{2cm} t_{fi} = 9.2nS 
+\]
+
+\subsection*{c) Comparaciones y observaciones} 
  
 \newpage
 \end{document}
