@@ -41,31 +41,32 @@ Con el valor del duty obtenemos el periodo de encendido de la llave $T_{on}=D T_
 Para asegurarnos que estemos trabajando en modo continuo, elegimos una $I_{o}$ tal que: $I_{o}>I_{OB}$:
 
 \[
-I_{OB} = \frac{V_o \cdot (1-D) \cdot T_s}{2L}
+I_{OB}(L=220\mu H) = \frac{V_o \cdot (1-D) \cdot T_s}{2L} = 42.5mA
 \]
-Resultando: 
 
-\begin{table}[H]
-\centering
-\begin{tabular}{|l|l|}
-\hline
-\multicolumn{1}{|c|}{$L [\mu H]$} & {$I_{OB} [mA]$}    \\ \hline
-220                   & 42.5   \\ \hline
 
-\end{tabular}
-\caption{Calculo de $I_{OB}$ seg\'un el valor de $L$}
-\label{tabla:calculo de Iob}
-\end{table}
+%Resultando: 
+
+%\begin{table}[H]
+%\centering
+%\begin{tabular}{|l|l|}
+%\hline
+%\multicolumn{1}{|c|}{$L [\mu H]$} & {$I_{OB} [mA]$}    \\ \hline
+%220                   & 42.5   \\ \hline
+%\end{tabular}
+%\caption{Calculo de $I_{OB}$ seg\'un el valor de $L$}
+%\label{tabla:calculo de Iob}
+%\end{table}
 
 Por lo tanto, suponiendo $I_o=100mA$, obtenemos una carga de $R=33\Omega$
 
 
 
 El valor del capacitor se obtuvo con la siguiente formula:
-$$C=\frac{(1-D)T_{s}^{2}}{8L\frac{\Delta V_{o_{max}}}{V_o}}=1.073\mu F$$
+$$C=\frac{(1-D).T_{s}^{2}}{8.L.\frac{\Delta V_{o_{max}}}{V_o}}=1.073\mu F$$
 
 Para realizar las simulaci\'on se tom\'o  $L=220\mu H$ y se obtuvo que: 
-$$D_{real}=0.715$$
+$$D_{real}=0.711$$
 
 \subsection*{b) Curvas teóricas}
 
@@ -113,11 +114,19 @@ A continuaci\'on se muestra la simulaci\'on en LTspice de las curvas del inciso 
 
 \begin{figure}[H]
   \centering
-    \includegraphics[scale = 0.52]{Imagenes/punto2/IL&ID}
-  \caption{Simulaci\'on IL(verde) y ID(azul)}
+    \includegraphics[scale = 1]{Imagenes/punto2/PicodeIrr}
+  \caption{Simulaci\'on IL(azul) y ID(verde)}
   \label{fig:IL&ID}
 \end{figure}
 
+
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[scale = 0.45]{Imagenes/punto2/Vo-D=0,711.PNG}
+  \caption{Simulaci\'on $V_o$ (azul)}
+  \label{fig:IL&ID}
+\end{figure}
 
 \subsection*{d) Comparaciones y observaciones}
 
@@ -128,9 +137,9 @@ En los c\'alculos que se realizaron en el inciso a) se consider\'o al diodo como
 Como la tensi\'on $V_L$ se ve afectada por el comportamiento no ideal del diodo, tambi\'en se ver\'a afectada el $D_{ideal}$ calculado.
 Cuando realizamos la simulaci\'on con un $T_{on}=D_{ideal}T_s$, la tensi\'on de salida se encontraba por debajo de los 3.3V. Por dicho motivo, aumentamos $D$ hasta lograr la tensi\'on de salida deseada. 
 
-Considerando el ripple que nos agreg\'o la ESR del capacitor, obtuvimos que el $D$ que cumple con los requerimientos de nuestra fuente es $D_{real}=0.715$, mayor al estimado en forma teórica, $D_{ideal} = 0.66$.
+Considerando el ripple que nos agreg\'o la ESR del capacitor, obtuvimos que el $D$ que cumple con los requerimientos de nuestra fuente es $D_{real}=0.711$, mayor al estimado en forma teórica, $D_{ideal} = 0.66$.
 
-
+El ripple que se obtiene a la salida, considerando una $ESR_C=1\Omega$ es del 165mV.
 
 
 
