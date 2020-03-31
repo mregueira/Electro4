@@ -130,7 +130,8 @@ A continuaci\'on se muestra la simulaci\'on en LTspice de las curvas del inciso 
 
 \subsection*{d) Comparaciones y observaciones}
 
-En los c\'alculos que se realizaron en el inciso a) se consider\'o al diodo como ideal. Si tenemos en cuenta la ca\'ida del diodo cuando conduce, la tensi\'on en el inductor mientras $SW=OFF$ es $V_{L}=-V_o-0.7$. Adem\'as, debemos considerar el pico de corriente de reverse recovery $(I_{rr})$ cuando el diodo deja de conducir. En el gráfico teórico se la señalo como un pico inverso menor, pero en la simulación se verificó que resulta ser bastante mayor, pudiendo llegar hasta un valor de 3A. En la práctica, este pico (que en este caso pasa a través del SW) tendrá que soportarlo el transistor MOS, como se experimentará en la sección 3. 
+En los c\'alculos que se realizaron en el inciso a) se consider\'o al diodo como ideal. Si tenemos en cuenta la ca\'ida del diodo cuando conduce, la tensi\'on en el inductor mientras $SW=OFF$ es $V_{L}=-V_o-0.7$, o sea cercana a $4V$. Mismo ocurre con la tensión sobre el SW: cuando está abierto, resulta la tensión de la fuente más la caída del diodo, llegando a los $5,7V$.\par 
+Adem\'as, debemos considerar el pico de corriente de reverse recovery $(I_{rr})$ cuando el diodo deja de conducir. En el gráfico teórico se la señalo como un pico inverso menor, pero en la simulación se verificó que resulta ser bastante mayor, pudiendo llegar a mostrae hasta un valor de 3A. Dado que el SW es ideal, durante este tiempo es como si se produjera un cortocircuito en la fuente, por lo que es razonable que la simulación muestre un valor grande. En la práctica, el pico que se produzca (que en este caso pasa a través del SW) tendrá que soportarlo el transistor MOS, como se experimentará en la sección 3. 
 
 
 
@@ -139,7 +140,7 @@ Cuando realizamos la simulaci\'on con un $T_{on}=D_{ideal}T_s$, la tensi\'on de 
 
 Considerando el ripple que nos agreg\'o la ESR del capacitor, obtuvimos que el $D$ que cumple con los requerimientos de nuestra fuente es $D_{real}=0.711$, mayor al estimado en forma teórica, $D_{ideal} = 0.66$.
 
-El ripple que se obtiene a la salida, considerando una $ESR_C=1\Omega$ es del 165mV.
+El ripple que se obtiene a la salida, considerando una $ESR_C=1\Omega$ es un $\Delta V_o = 165mV$, que equivale al $5\%$ buscado.
 
 
 
