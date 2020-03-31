@@ -3,7 +3,7 @@
 
 \section{Topolog\'ia: Funcionamiento de una topolog\'ia y comprensio\'n de todas las curvas}
 
-\subsection*{a)} 
+\subsection*{a) Diseño de la fuente} 
 
 Se diseñ\'o una fuente con las siguientes caracter\'isticas:
 
@@ -38,7 +38,12 @@ $$D_{ideal}=\frac{V_o}{V_i}=0.66$$
 Con el valor del duty obtenemos el periodo de encendido de la llave $T_{on}=D T_s=D \frac{1}{f_{sw}}$
 
 
-Para asegurarnos que estemos trabajando en modo continuo, elegimos una $I_{o}$ tal que: $I_{o}>I_{OB}$.
+Para asegurarnos que estemos trabajando en modo continuo, elegimos una $I_{o}$ tal que: $I_{o}>I_{OB}$:
+
+\[
+I_{OB} = \frac{V_o \cdot (1-D) \cdot T_s}{2L}
+\]
+Resultando: 
 
 \begin{table}[H]
 \centering
@@ -59,10 +64,10 @@ Por lo tanto, suponiendo $I_o=100mA$, obtenemos una carga de $R=33\Omega$
 El valor del capacitor se obtuvo con la siguiente formula:
 $$C=\frac{(1-D)T_{s}^{2}}{8L\frac{\Delta V_{o_{max}}}{V_o}}=1.073\mu F$$
 
-Para realizar las simulaci\'on tom\'o  $L=220\mu H$ y se obtuvo que: 
+Para realizar las simulaci\'on se tom\'o  $L=220\mu H$ y se obtuvo que: 
 $$D_{real}=0.715$$
 
-\subsection*{b)}
+\subsection*{b) Curvas teóricas}
 
 Se realiz\'o el gr\'afico de la señal de disparo (SW), tensión en el inductor (VL),corriente en el inductor (IL) y corriente en el diodo (ID) considerando el diodo real. 
 
@@ -86,7 +91,7 @@ $$I_{L_{min}}= I_o - \frac{(V_i-V_o)D_{real}T_s}{L}=53.6mA$$
 
 
 
-\subsection*{c)}
+\subsection*{c) Curvas simuladas}
 
 A continuaci\'on se muestra la simulaci\'on en LTspice de las curvas del inciso anterior tomando como tiempo de encendido de la llave a $T_{on}=D_{real}T_s$
 
@@ -114,16 +119,16 @@ A continuaci\'on se muestra la simulaci\'on en LTspice de las curvas del inciso 
 \end{figure}
 
 
-\subsection*{d)}
+\subsection*{d) Comparaciones y observaciones}
 
-En los c\'alculos que se realizaron en el inciso a) se consider\'o al diodo como ideal. Si tenemos en cuenta la ca\'ida del diodo cuando conduce, la tensi\'on en el inductor mientras $SW=OFF$ es $V_{L}=-V_o-0.7$. Adem\'as, debemos considerar el pico de corriente de reverse recovery cuando el diodo deja de conducir. 
+En los c\'alculos que se realizaron en el inciso a) se consider\'o al diodo como ideal. Si tenemos en cuenta la ca\'ida del diodo cuando conduce, la tensi\'on en el inductor mientras $SW=OFF$ es $V_{L}=-V_o-0.7$. Adem\'as, debemos considerar el pico de corriente de reverse recovery $(I_{rr})$ cuando el diodo deja de conducir. En el gráfico teórico se la señalo como un pico inverso menor, pero en la simulación se verificó que resulta ser bastante mayor, pudiendo llegar hasta un valor de 3A. En la práctica, este pico (que en este caso pasa a través del SW) tendrá que soportarlo el transistor MOS, como se experimentará en la sección 3. 
 
 
 
-Como la tensi\'on $V_L$ se ve afectada por el comportamiento no ideal del diodo, tambi\'en se ver\'a afectada la $D_{ideal}$ calculada.
+Como la tensi\'on $V_L$ se ve afectada por el comportamiento no ideal del diodo, tambi\'en se ver\'a afectada el $D_{ideal}$ calculado.
 Cuando realizamos la simulaci\'on con un $T_{on}=D_{ideal}T_s$, la tensi\'on de salida se encontraba por debajo de los 3.3V. Por dicho motivo, aumentamos $D$ hasta lograr la tensi\'on de salida deseada. 
 
-Considerando el ripple que nos agreg\'o la ESR del capacitor, obtuvimos que la $D$ que cumple con los requerimientos de nuestra fuente es $D_{real}=0.715$.
+Considerando el ripple que nos agreg\'o la ESR del capacitor, obtuvimos que el $D$ que cumple con los requerimientos de nuestra fuente es $D_{real}=0.715$, mayor al estimado en forma teórica, $D_{ideal} = 0.66$.
 
 
 
