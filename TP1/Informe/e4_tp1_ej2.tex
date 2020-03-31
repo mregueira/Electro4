@@ -41,7 +41,7 @@ Con el valor del duty obtenemos el periodo de encendido de la llave $T_{on}=D T_
 Para asegurarnos que estemos trabajando en modo continuo, elegimos una $I_{o}$ tal que: $I_{o}>I_{OB}$:
 
 \[
-I_{OB}(L=220\mu H) = \frac{V_o \cdot (1-D) \cdot T_s}{2L} = 42.5mA
+I_{OB}(L=220\mu H) = \frac{V_o \cdot (1-D_{ideal}) \cdot T_s}{2L} = 42.5mA
 \]
 
 
@@ -63,7 +63,7 @@ Por lo tanto, suponiendo $I_o=100mA$, obtenemos una carga de $R=33\Omega$
 
 
 El valor del capacitor se obtuvo con la siguiente formula:
-$$C=\frac{(1-D) \cdot T_{s}^{2}}{8\cdot L\cdot \frac{\Delta V_{o_{max}}}{V_o}}=1.073\mu F$$
+$$C=\frac{(1-D_{ideal}) \cdot T_{s}^{2}}{8\cdot L\cdot \frac{\Delta V_{o_{max}}}{V_o}}=1.073\mu F$$
 
 Para realizar las simulaci\'on se tom\'o  $L=220\mu H$ y se obtuvo que: 
 $$D_{real}=0.711$$
@@ -87,8 +87,8 @@ $$I_{L_{min}}= I_o - \frac{\Delta I_L}{2}$$
 
 Adem\'as, en r\'egimen permanente se cumple: $\Delta I_{L_{ON}}+\Delta I_{L_{OFF}}=0$ y $\Delta I_{L_{ON}}=\frac{(V_i-V_o)\cdot D\cdot T_s}{L}$.
 
-$$I_{L_{max}}= I_o + \frac{(V_i-V_o)\cdot D_{real}\cdot T_s}{L}=142.5mA$$
-$$I_{L_{min}}= I_o - \frac{(V_i-V_o)\cdot D_{real}\cdot T_s}{L}=53.6mA$$
+$$I_{L_{max}}= I_o + \frac{(V_i-V_o)\cdot D_{real}\cdot T_s}{L}=145mA$$
+$$I_{L_{min}}= I_o - \frac{(V_i-V_o)\cdot D_{real}\cdot T_s}{L}=54mA$$
 
 
 
