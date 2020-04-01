@@ -6,3 +6,29 @@ tiempos cuando bajo la fuente
 td(off)=135.8 ns
 trv=523 ns
 tfi=9.2 ns
+
+
+
+
+
+ej3:
+
+td=98ns
+tri=27ns
+tfv=556ns
+
+tiempos cuando bajo la fuente
+td(off)=56 ns
+trv=137 ns
+tfi=8 ns
+
+
+ej4:
+td=90ns
+tri=ns    //no se aprecia  
+tfv=436ns
+
+tiempos cuando bajo la fuente
+td(off)=54.4 ns
+trv=145 ns
+tfi=84.6 ns
