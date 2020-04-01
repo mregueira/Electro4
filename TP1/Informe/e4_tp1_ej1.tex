@@ -7,7 +7,7 @@ Para el circuito de disparo propuesto se utilizó un valor de $V_{gg}=10V$, y lo
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\linewidth]{Imagenes/Punto1/CircuitoDisparo.png}
+\includegraphics[width=0.6\linewidth]{Imagenes/Punto1/CircuitoDisparo.png}
 \end{figure}
 
 \subsection*{a) Cálculo teórico de los tiempos de conmutación}
@@ -93,7 +93,7 @@ I_g = \frac{\Delta Q}{\Delta t} \Longrightarrow t_{fv} = \frac{\Delta Q}{I_g} = 
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Imagenes/Punto1/EncendidoTeorico.png}
+\includegraphics[width=0.7\linewidth]{Imagenes/Punto1/EncendidoTeorico.png}
 \caption{Curvas de encendido teórico}
 \end{figure}
 
@@ -121,6 +121,8 @@ Para el tiempo que se mantiene $V_{gsIo}$ constante, es cuando aumenta la tensi�
 \frac{V_{gsIo}}{R_g} = I_g = 44mA \Longrightarrow t_{rv} = \frac{\Delta Q}{I_g} = 136nS
 \]
 
+\newpage
+
 Y finalmente, el tiempo en que la corriente $I_d$ disminuye, se da entre que $V_{gs}$ pasa de $V_{gsIo}$ a $V_{gsTh}$:
 
 \[
@@ -133,9 +135,11 @@ t_{fi} = -\tau_1 \cdot Ln \left( \frac{V_{gsTh}}{V_{gsIo}}\right) = 6,2nS
  
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Imagenes/Punto1/ApagadoTeorico.png}
+\includegraphics[width=0.7\linewidth]{Imagenes/Punto1/ApagadoTeorico.png}
 \caption{Curvas de apagado teórico}
 \end{figure}
+ 
+\newpage 
  
 \subsection*{b) Curvas simuladas} 
  
@@ -151,6 +155,13 @@ De donde se tabulan los tiempos:
 t_d(ON) = 34nS \hspace{2cm} t_{ri} = 3.72nS \hspace{2cm} t_{fv} = 327nS
 \]
 
+\subsubsection*{1- Comparaciones y observaciones}
+
+Cuando comienza a aumentar $V_{gs}$, se empieza a formar el canal que empezaría a permitir el paso de corriente. Como por la bobina no circulaba corriente hasta ese momento, para mantenerse en dicho estado genera una tensión en sentido opuesto (la corriente no puede cambiar en ella de forma abrupta). Al tener signo opuesto, esa tensión se suma a la $V_{ds}$ actual, que era igual a la de la fuente $V_d$, lo que produce el sobrepico de tensión que se observa en $V_{ds}$.\par
+Al tener una sobretensión en dicho punto, sobre el diodo cae una tensión directa de $(V_{d} + V_L) - V_d$, que alcanza para encenderlo y que conduzca durante un breve período de tiempo, que es la meseta negativa de corriente que se observa en $I_d$ (esta diferencia de corriente viene desde Gnd y pasa por el diodo interno del MOS).\par
+Pasado este tiempo, el canal comienza a conducir, por lo que la $V_{ds}$ empieza a disminuir. Esto lleva a que el diodo se apague, generando el pico de corriente $I_{rr}$ (reverse recovery current), que pasa por el canal, como se observa en el gráfico de $I_d$ (dado que por la bobina no puede derivarse por lo dicho al principio).\par
+La tasa de aumento de la corriente $I_d$ está dada por el $\tau$ del circuito $R-L$ ($1.46\mu S$), que es lento en comparación al tiempo de encendido del transistor. Esto se ve reflejado directamente en el tiempo $t_{fv}$, dado que el aumento transitorio de tensión en la bobina se da a la misma tasa con la que disminuye $V_{ds}$ (por eso el tiempo $t_{fv}$ simulado resulta mayor al calculado, que supone carga inductiva pura).
+
 \begin{figure}[H]
 \centering
 %\includegraphics[width=0.95\linewidth]{Imagenes/Punto1/tiempo_apagado.png}
@@ -163,7 +174,9 @@ De donde se tabulan los tiempos:
 t_d(OFF) = 135.8nS \hspace{2cm} t_{rv} = 523nS \hspace{2cm} t_{fi} = 9.2nS 
 \]
 
-\subsection*{c) Comparaciones y observaciones} 
+\subsubsection*{1- Comparaciones y observaciones}
+ 
+El apagado simulado resulta muy similar al planteado en forma teórica. Cuando el canal comienza a dejar de conducir corriente, empieza a aumentar la $V_{ds}$. A igual tasa de crecimiento comienza a generarse una tensión opuesta en la bobina (dado que la corriente en ella no puede cambiar de forma abrupta, como se mencionó previamente). Cuando el canal dejó de conducir, la corriente que circulaba por la bobina toma el camino a través del diodo, durante el tiempo que dura $t_{fi}$. Luego de dicho tiempo, la bobina continúa descargando la energía que almacenó a través del circuito $R-L-Diodo$ al tiempo característico $\tau$.
  
 \newpage
 \end{document}
