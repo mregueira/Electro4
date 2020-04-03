@@ -60,7 +60,10 @@ Al tener tiempos de conmutación menores en el encendido respecto al circuito en
 \caption{Curvas de apagado simulado}
 \end{figure}
 
-Por otra parte, los tiempos de conmutación del apagado son mayores, por lo que las pérdidas de potencia en el apagado son, entonces, mayores que en modo continuo.
+Por otra parte, los tiempos de conmutación del apagado son mayores, por lo que las pérdidas de potencia en el apagado son, entonces, mayores que en modo continuo.\par
+Podemos observar que el valor de la potencia disipada queda expresada ahora de la siguiente manera:\par
+\[ P_dis = \frac{V_(in)*I_0*t_(conm)*f_(sw)}{2} = 1,35 mW  \] 
+Este valor, representa el 2,8\% de la potencia que entrega $V_d$, por lo que resulta ser levemente menos eficiente. Además, notamos como el circuito debe manejar picos de corriente más altos que en su configuración de modo continuo, especialmente en el diodo y el transistor MOS.
 
 \newpage
 \end{document}
