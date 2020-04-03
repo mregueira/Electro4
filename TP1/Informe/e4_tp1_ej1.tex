@@ -30,7 +30,7 @@ De donde se obtiene:
 \[
 V_{gsTh} = 4V \hspace{2cm} V_{gsIo} = 4.4V
 \]
-
+\newpage
 Cuando el canal no conduce, el valor de $V_{ds} = V2 = 50V$. Con dicho valor se busca en la hoja de datos el valor de la capacidad $C_{gs} + C_{gd1}$, que se encuentra como $C_{iss}$, de la curva $C(V_{ds})$:
 
 \begin{figure}[H]
@@ -77,7 +77,7 @@ Durante el tiempo que $V_{gs}$ se mantiene constante (que es cuando disminuye el
 \[
 I_g = \frac{V_{gg} - V_{gsIo}}{R_g} = 56mA
 \] 
-
+\newpage
 Dado que la corriente se mantiene constante, podemos obtener la variación de carga en Gate ($\Delta Q$) durante ese tiempo de la curva $V_{gs}(Q_g)$ provista por la hoja de datos, entrando con el valor de $V_{gsIo}$:
 
 \begin{figure}[H]
@@ -96,6 +96,8 @@ I_g = \frac{\Delta Q}{\Delta t} \Longrightarrow t_{fv} = \frac{\Delta Q}{I_g} = 
 \includegraphics[width=0.7\linewidth]{Imagenes/Punto1/EncendidoTeorico.png}
 \caption{Curvas de encendido teórico}
 \end{figure}
+
+\newpage
 
 Cuando el canal conduce $I_o$, el valor de $V_{ds}$ es $V_{ds-ON} = I_d \cdot R_{ds-ON} = 0.8V$. Con esto último, el valor de la capacidad resulta (aproximadamente):
 
@@ -120,8 +122,6 @@ Para el tiempo que se mantiene $V_{gsIo}$ constante, es cuando aumenta la tensi�
 \[
 \frac{V_{gsIo}}{R_g} = I_g = 44mA \Longrightarrow t_{rv} = \frac{\Delta Q}{I_g} = 136nS
 \]
-
-\newpage
 
 Y finalmente, el tiempo en que la corriente $I_d$ disminuye, se da entre que $V_{gs}$ pasa de $V_{gsIo}$ a $V_{gsTh}$:
 
