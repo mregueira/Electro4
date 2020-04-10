@@ -1,0 +1,116 @@
+\documentclass[e4_tp1_main.tex]{subfiles}
+\begin{document}
+
+\section{Disparo de un transistor MOSFET}
+
+Para el circuito de disparo propuesto se utilizó un valor de $V_{gg}=10V$, y los datos del transistor se fueron obteniendo de la hoja de datos del IRF530 provista por Vishay, como se irá mostrando en el desarrollo.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{Imagenes/Punto1/CircuitoDisparo.png}
+\end{figure}
+
+\subsection*{a) Cálculo teórico de los tiempos de conmutación}
+
+Para el cálculo teórico de los tiempos de conmutación, se siguió el ejemplo práctico desarrollado en la clase.\par
+Para el momento en el que el transistor está conduciendo, se calcula el valor de $I_o$ considerando en régimen estacionario solo la resistencia: $I_o = \frac{Vd}{R2} = 0.33A$.
+
+Con dicho valor de $I_o$, se busca en la hoja de datos del transistor la curva $I_d(V_{gs})$, para obtener la $V_{gsIo}$ (el valor de $V_{gs}$ para el cual el canal conduce $I_o$), de donde se obtiene:
+
+\[
+V_{gsTh} = 4V \hspace{2cm} V_{gsIo} = 4.4V
+\]
+
+Cuando el canal no conduce, el valor de $V_{ds} = V2 = 50V$. Con dicho valor se busca en la hoja de datos el valor de la capacidad $C_{gs} + C_{gd1}$, que se encuentra como $C_{iss}$, de la curva $C(V_{ds})$, de donde se obtiene que:
+
+\[
+C_{gs} + C_{gd1} = 650pF
+\]
+
+Con los datos anteriores ya podemos calcular $\tau_1$, lo que nos permite obtener los tiempos correspondientes al encendido del transistor:
+
+\[
+t_d(ON) = 33,2nS \hspace{2cm} t_{ri} = 4.5nS
+\]
+
+Durante el tiempo que la corriente de Gate ($I_g$) se mantiene constante, debido a la ley de ohm sobre la resistencia $R_g$, mientras $V_{gs}(t) = V_{gsIo}$, se tiene $I_g = \frac{V_{gg} - V_{gsIo}}{R_g} = 56mA$.
+ 
+
+Dado que la corriente se mantiene constante, podemos obtener la variación de carga en Gate ($\Delta Q$) durante ese tiempo de la curva $V_{gs}(Q_g)$ provista por la hoja de datos, entrando con el valor de $V_{gsIo}$, de donde se obtiene que el $\Delta_Q = 6nC$. Sabiendo que la corriente es variación de la carga en el tiempo, podemos despejar el tiempo de caída de $V_{ds}$:
+
+\[
+I_g = \frac{\Delta Q}{\Delta t} \Longrightarrow t_{fv} = \frac{\Delta Q}{I_g} = 107nS
+\]
+
+
+Cuando el canal conduce $I_o$, el valor de $V_{ds}$ es $V_{ds-ON} = I_d \cdot R_{ds-ON} = 0.8V$. Con esto último, el valor de la capacidad resulta (aproximadamente):
+
+\[
+C_{gs} + C_{gd2} = 1150pF
+\]
+
+Por lo que podemos obtener el tiempo que demora $V_{gs}(t)$ en llegar a $V_{gsIo}$, $t_d(OFF)$:
+
+\[
+t_d(OFF) = -\tau_2 \cdot ln\left( \frac{V_{gsIo}}{V_{gg}} \right) = 141nS
+\]
+
+Para el tiempo que se mantiene $V_{gsIo}$ constante, es cuando aumenta la tensión $V_{ds}$, por lo que usando el valor de $\Delta Q$ hallado previamente se obtiene:
+
+\[
+\frac{V_{gsIo}}{R_g} = I_g = 44mA \Longrightarrow t_{rv} = \frac{\Delta Q}{I_g} = 136nS
+\]
+
+Y finalmente, el tiempo en que la corriente $I_d$ disminuye, se da entre que $V_{gs}(t)$ pasa de $V_{gsIo}$ a $V_{gsTh}$:
+
+\[
+t_{fi} = -\tau_1 \cdot Ln \left( \frac{V_{gsTh}}{V_{gsIo}}\right) = 6,2nS
+\]
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Imagenes/Punto1/EncendidoApagadoTeorico.png}
+\caption{Curvas de encendido y apagado teórico}
+\end{figure}
+ 
+\subsection*{b) Curvas simuladas} 
+ 
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Imagenes/Punto1/tiempo_encendidoX.png}
+\caption{Curvas de encendido simulado}
+\end{figure}
+
+
+
+De donde se tabulan los tiempos:
+
+\[
+t_d(ON) = 34nS \hspace{2cm} t_{ri} = 3.72nS \hspace{2cm} t_{fv} = 327nS
+\]
+
+\subsubsection*{1- Comparaciones y observaciones}
+
+Cuando comienza a aumentar $V_{gs}$, se empieza a formar el canal que empezaría a permitir el paso de corriente. Como por la bobina no circulaba corriente hasta ese momento, para mantenerse en dicho estado genera una tensión en sentido opuesto (la corriente no puede cambiar en ella de forma abrupta). Al tener signo opuesto, esa tensión se suma a la $V_{ds}$ actual, que era igual a la de la fuente $V_d$, lo que produce el sobrepico de tensión que se observa en $V_{ds}$.\par
+Al tener una sobretensión en dicho punto, sobre el diodo cae una tensión directa de $(V_{d} + V_L) - V_d$, que alcanza para encenderlo y que conduzca durante un breve período de tiempo, que es la meseta negativa de corriente que se observa en $I_d$ (esta diferencia de corriente viene desde Gnd y pasa por el diodo interno del MOS).\par
+Pasado este tiempo, el canal comienza a conducir, por lo que la $V_{ds}$ empieza a disminuir. Esto lleva a que el diodo se apague, generando el pico de corriente $I_{rr}$ (reverse recovery current), que pasa por el canal, como se observa en el gráfico de $I_d$ (dado que por la bobina no puede derivarse por lo dicho al principio).\par
+La tasa de aumento de la corriente $I_d$ está dada por el $\tau$ del circuito $R-L$ ($1.46\mu S$), que es lento en comparación al tiempo de encendido del transistor. Esto se ve reflejado directamente en el tiempo $t_{fv}$, dado que el aumento transitorio de tensión en la bobina se da a la misma tasa con la que disminuye $V_{ds}$ (por eso el tiempo $t_{fv}$ simulado resulta mayor al calculado, que supone carga inductiva pura).
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Imagenes/Punto1/tiempo_apagadoX.png}
+\caption{Curvas de apagado simulado}
+\end{figure}
+
+De donde se tabulan los tiempos:
+
+\[
+t_d(OFF) = 135.8nS \hspace{2cm} t_{rv} = 523nS \hspace{2cm} t_{fi} = 9.2nS 
+\]
+
+\subsubsection*{1- Comparaciones y observaciones}
+ 
+El apagado simulado resulta muy similar al planteado en forma teórica. Cuando el canal comienza a dejar de conducir corriente, empieza a aumentar la $V_{ds}$. A igual tasa de crecimiento comienza a generarse una tensión opuesta en la bobina (dado que la corriente en ella no puede cambiar de forma abrupta, como se mencionó previamente). Cuando el canal dejó de conducir, la corriente que circulaba por la bobina toma el camino a través del diodo, durante el tiempo que dura $t_{fi}$. Luego de dicho tiempo, la bobina continúa descargando la energía que almacenó a través del circuito $R-L-Diodo$ al tiempo característico $\tau$.
+ 
+\newpage
+\end{document}
