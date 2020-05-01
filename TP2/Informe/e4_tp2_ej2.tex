@@ -59,5 +59,53 @@ T_{OSC} = t_r + t_d \longrightarrow f_{OSC} = 150KHz
 f_{SW} = \frac{f_{OSC}}{2} = 75KHz
 \]
 
+\subsection*{$\mathbf{I_{PK}(I_O)}$ - Corriente pico en el switch en función de $\mathbf{I_O}$}
+De la hoja de datos se tiene que, en general, la corriente pico en el switch es:
+
+\[
+I_{PK} = \frac{V_{Pin1} - 1.4V}{3R_S}
+\]
+
+Donde $R_S$ es la resistencia para el sensado de la corriente en el switch.
+
+Tomando la sección de circuito de la hoja de datos, agregando la realimentación externa:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{Imagenes/Punto2/IPK-Circuito.png}
+\caption{Circuito para análisis de $I_{PK}$}
+\end{figure}
+
+Para la frecuencia de switching, se puede considerar el capacitor $C_3$ de baja reactancia, por lo que el circuito con el operacional se puede estudiar como un sumador.\par
+Pasivando la entrada $V_{f}$, se tiene:
+
+\[
+V_{o1} = 2.5V \cdot \left(1+ \frac{10K}{10K}\right) = 5V 
+\]
+
+Pasivando la otra entrada fija de 2.5V:
+
+\[
+V_{o2} = V_{f} \cdot \left(- \frac{10K}{10K} \right) = -V_{f}
+\]
+
+Por lo que $V_{Pin1}$ resulta:
+
+\[
+V_{o} = V_{Pin1} = 5 - V_{f} = 5 - V_{Sens} \cdot G = 5 - G \cdot I_o \cdot R_{SIo}
+\]
+
+Reemplazando en la ecuación de $I_{PK}$ resulta:
+
+\[
+I_{PK} = \frac{3.6V - G \cdot I_o \cdot R_{SIo}}{3R_S}
+\]
+La $R_{SIo}$ en este caso también es de $0.1\Omega$.
+
+\subsection*{Función de Blanking}
+
+El problema al que responde esta función es sobre el ruido producido en la entrada $I_{Sense}$, debido a los picos de corriente que ocurren en la conmutación del transistor, como la $I_{rr}$ del diodo. Puede provocar una desviación excesiva en el duty del PWM.\par
+La función de blanking (ubicada a la salida del comparador de $I_{Sense}$) lo que hace es retener la salida de dicho comparador cuando el transistor conmuta, durante un breve período de tiempo fijo. De esta forma se previene el inconveniente anterior sobre el PWM. Esta función evita tener que agregar un filtro en la entrada $I_{Sense}$, que provocaría un mayor tiempo de respuesta en la realimentación de corriente.\par
+El tiempo de blanking es función de la tensión en el pin de feedback (Pin 2). Para condiciones normales de operación ($V_{FB} = 2.5V$), el tiempo es de 100nS, y disminuye a cero si se lleva a cero dicha tensión. Esto quiere decir que el tiempo de blanking es mínimo cuando se enciende el circuito y durante un cortocircuito en la salida. 
 
 \end{document}
