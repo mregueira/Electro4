@@ -108,4 +108,56 @@ El problema al que responde esta función es sobre el ruido producido en la entr
 La función de blanking (ubicada a la salida del comparador de $I_{Sense}$) lo que hace es retener la salida de dicho comparador cuando el transistor conmuta, durante un breve período de tiempo fijo. De esta forma se previene el inconveniente anterior sobre el PWM. Esta función evita tener que agregar un filtro en la entrada $I_{Sense}$, que provocaría un mayor tiempo de respuesta en la realimentación de corriente.\par
 El tiempo de blanking es función de la tensión en el pin de feedback (Pin 2). Para condiciones normales de operación ($V_{FB} = 2.5V$), el tiempo es de 100nS, y disminuye a cero si se lleva a cero dicha tensión. Esto quiere decir que el tiempo de blanking es mínimo cuando se enciende el circuito y durante un cortocircuito en la salida. 
 
+\subsection*{Eficiencia de la Fuente}
+Para obtener el rendimiento de la fuente, se calcula la potencia entregada por la fuente y la potencia de salida:
+
+\[
+P_i = V_d \cdot I_d = 12V \cdot 4A = 48W  
+\]
+\[
+P_o = V_o \cdot I_o = 21.4V \cdot 2A = 42.8W
+\]
+
+Por lo que el rendimiento de la fuente en relación entrada/salida es:
+\[
+\eta \% = 100 \cdot \frac{P_o}{P_i} = 89.2 \%
+\]
+Por lo que el resto de las potencia son las pérdidas en los elementos, a calcular a continuación.\par
+
+Las pérdidas en el transistor se calculan midiendo los tiempos de conmutación, mediante la ecuación:
+
+\[
+P_d = \frac{1}{2} V_{ds} \cdot I_d \cdot (t_{ri} + t_{fv} + t_{fi} + t_{rv}) \cdot f_{sw}
+\]
+
+Para las pérdidas en el diodo, se calcula con el valor medio, es decir mientras conduce (no se tiene el cuenta las pérdidas por $I_{rr}$ dado que no es representativa en comparación a las pérdidas durante la conducción del diodo):
+
+\[
+P_D = I_D \cdot V_D \cdot t_{off} \cdot f_{sw}
+\]
+
+Para las pérdidas en las resistencias de sensado de $I_{sw}$ y de $I_o$:
+
+\[
+P_{R} = I_{sw} \cdot V_{R4} \cdot t_{on} \cdot f_{sw} + I_o \cdot V_{R2} 
+\]
+
+Las pérdidas en el controlador PWM, ocurren mayormente durante el encendido del transistor. Midiendo el tiempo que dura dicha corriente, se tiene:
+
+\[
+P_{IC} = I_c \cdot V_{cc} \cdot t_{on-Isw} \cdot f_{sw}
+\]
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|l|c|c|}
+\hline
+Componente                        & \multicolumn{1}{l|}{Pérdida de potencia} & \multicolumn{1}{l|}{\% Sobre el total} \\ \hline
+Transistor MOSFET                 & 1.1W                                     & 2.3\%                                  \\ \hline
+Diodo de potencia                 & 2W                                       & 4.2\%                                  \\ \hline
+Controlador PWM                   & 0.08W                                    & 0.2\%                                  \\ \hline
+Resistencias para medir corriente & 1W                                       & 2.1\%                                  \\ \hline
+\end{tabular}
+\end{table}
+
 \end{document}
