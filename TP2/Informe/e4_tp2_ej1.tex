@@ -3,5 +3,20 @@
 \newgeometry{top=2.5cm, bottom=2.0cm, left=2.25cm, right=2.25cm}
 
 \section{Modulación PWM y realimentación}
+\subsection*{a) Valores de $R2$ y $R3$ si $V_o=25 VDC$}
+
+A partir del divisor de tensi\'on y sabiendo que se busca cumplir $V_{FB}=V_{REF}$
+$$V_{FB}=V_{REF}= V_o \cdot \frac{R_3}{R_2+R_3}$$
+
+Suponiendo $R_3=10k \Omega $
+
+$$R_2=R_3 \cdot \left( \frac{V_o}{V_{REF}} - 1 \right)=90k \Omega $$
+
+
+\subsection*{b) Transferencia  $\frac{ \widetilde{v_c}(s)}{\widetilde{v_o}(s)}$ para pequeñas variaciones} 
+
+La transferencia a pequeñas variaciones del amplificador de error es independiente de $V_{REF}$ resultando en un inversor con $Z_1=R_2$ y $Z_2=R_6 + \frac{1}{sC}$
+
+$$\frac{\widetilde{v_c}(s)}{\widetilde{v_o}(s)}=-\frac{R_6 + \frac{1}{sC} }{R_2}$$
 
 \end{document}
