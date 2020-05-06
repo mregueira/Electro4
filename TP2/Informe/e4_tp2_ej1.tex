@@ -32,19 +32,19 @@ La transferencia a pequeñas variaciones del amplificador de error se obtiene an
 
 \subsubsection*{c) Amplificador de error como bloque de un sistema LTI. Ganancia, Polos y Ceros}
 
-Reemplazando los valores num\'ericos de la consigna en ecuaci\'on \eqref{ec1.1.b}, el diagrama en bloque resulta: 
+Reacomodando la ecuaci\'on \eqref{ec1.1.b}, el diagrama en bloque resulta: 
 
 \begin{center}
 \begin{tikzpicture}[
 squarednode/.style={rectangle, draw=black, fill=white!5, ultra thick, minimum size=15mm},
 ]
 \draw[ultra thick] (-2,0) -- (2,0);
-\node[squarednode]      (maintopic) {\LARGE {$-\frac{1}{9} \cdot \frac{s+1000}{s}$}};
+\node[squarednode]      (maintopic) {\LARGE {$- \frac{R_6}{R_2} \cdot \frac{s+\frac{1}{C_2 \cdot R_6}}{s}$}};
 \end{tikzpicture}
 \end{center}
 
 
-El amplificador de error cuenta con una ganacia $G_{amp}=\frac{1}{9}$, un polo en $s=-1000$ y un cero en el origen.
+El amplificador de error cuenta con una ganacia $G_{amp}=\frac{R_6}{R_2} =\frac{1}{9}$, un polo en $s=-\frac{1}{C_2 \cdot R_6 }=-1000$ y un cero en el origen.
 
 
 \subsubsection*{d) Conjunto fuente de corriente I1 y R7}
@@ -155,14 +155,14 @@ X(s)=
 \end{bmatrix}
 \end{equation}
 
-\vspace{1cm}
+\vspace{0.5cm}
 
 \begin{equation}
 \frac{ \widetilde{v_o}(s)}{\widetilde{d}(s)}= \frac{V_1}{(d-1)^2} \cdot
  \frac{\frac{(d-1)^2}{L_1 \cdot C_1} -s}{s^2 +\frac{1}{R_L \cdot C_1 } s + \frac{(d-1)^2}{L_1 \cdot C_1}}
 \end{equation}
 
-% Cuales son las Singularidades del sistema?
+El sistema cuenta con dos polos complejos conjugados en el semi-plano izquierdo y un cero real en el semi-plano derecho.
 \subsubsection*{b) Valor real del Duty cycle}
 
 %Por que es diferente del teorico?
