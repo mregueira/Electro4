@@ -59,6 +59,26 @@ T_{OSC} = t_r + t_d \longrightarrow f_{OSC} = 150KHz
 f_{SW} = \frac{f_{OSC}}{2} = 75KHz
 \]
 
+\subsection*{Perturbaciones sobre el circuito}
+Se analizarán dos casos: aplicando un escalón de carga (cortocircuitando 2 LED's), y aplicando un escalón de alimentación (pasando la fuente de entrada de 12V a 15V).
+\subsubsection*{Perturbaciones en la carga}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{Imagenes/Punto2/Carga.PNG}
+\caption{Respuesta frente a escalón de carga: $I_o$ (Azul) - $V_{n007}$ es el SW (Rojo) - $V_o$ (Verde)}
+\end{figure}
+
+Al producir el escalón de carga (cuando la tensión en el Sw pasa a 0V), como se tiene la misma tensión en dicho instante para una menor cantidad de LED's ahora, se observa entonces un pico de corriente positivo. Esto es debido a que el aumento de tensión en los LED's se traduce en un aumento exponencial de la corriente, debido a la relación $V_D(I_D)$. A medida que el lazo de realimentación vuelve a llevar la corriente hacia el valor regulado de 2A, la tensión en los LED's restantes disminuye, por lo que la tensión de salida disminuye. 
+
+\subsubsection*{Perturbaciones en la fuente}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{Imagenes/Punto2/fuentevariable-I-V.PNG}
+\caption{Respuesta frente a escalón de tensión: $I_o$ (Azul) - $V_{vcc}$ es la entrada (Rojo) - $V_o$ (Verde)}
+\end{figure}
+
+En la imagen se muestra que, frente al escalón en la tensión de entrada, un aumento tanto en la tensión de salida como en la corriente (este último con mayor zoom). Para ambos, el porcentaje de aumento es mucho menor que en el caso de escalón de carga, en particular el de la corriente es solamente de un 5\% de su valor nominal. Como la tensión de salida se mantiene casi estable frente a perturbaciones en la entrada, es de esperar que la corriente, por consiguiente, no varíe en mayor proporción.
+
 \subsection*{$\mathbf{I_{PK}(I_O)}$ - Corriente pico en el switch en función de $\mathbf{I_O}$}
 De la hoja de datos se tiene que, en general, la corriente pico en el switch es:
 
@@ -127,25 +147,25 @@ Por lo que el resto de las potencia son las pérdidas en los elementos, a calcul
 Las pérdidas en el transistor se calculan midiendo los tiempos de conmutación, mediante la ecuación:
 
 \[
-P_d = \frac{1}{2} V_{ds} \cdot I_d \cdot (t_{ri} + t_{fv} + t_{fi} + t_{rv}) \cdot f_{sw}
+P_d = \frac{1}{2} \cdot V_{ds} \cdot I_d \cdot (t_{ri} + t_{fv} + t_{fi} + t_{rv}) \cdot f_{sw} = 1.1W
 \]
 
-Para las pérdidas en el diodo, se calcula con el valor medio, es decir mientras conduce (no se tiene el cuenta las pérdidas por $I_{rr}$ dado que no es representativa en comparación a las pérdidas durante la conducción del diodo):
+Para las pérdidas en el diodo, se calcula con el valor medio, es decir mientras conduce (no se tiene el cuenta las pérdidas por $I_{rr}$ dado que no es representativa en comparación a las pérdidas durante todo el tiempo de conducción del diodo):
 
 \[
-P_D = I_D \cdot V_D \cdot t_{off} \cdot f_{sw}
+P_D = I_D \cdot V_D \cdot t_{off} \cdot f_{sw} = 2W
 \]
 
 Para las pérdidas en las resistencias de sensado de $I_{sw}$ y de $I_o$:
 
 \[
-P_{R} = I_{sw} \cdot V_{R4} \cdot t_{on} \cdot f_{sw} + I_o \cdot V_{R2} 
+P_{R} = I_{sw} \cdot V_{R4} \cdot t_{on} \cdot f_{sw} + I_o \cdot V_{R2} = 1.2W  
 \]
 
 Las pérdidas en el controlador PWM, ocurren mayormente durante el encendido del transistor. Midiendo el tiempo que dura dicha corriente, se tiene:
 
 \[
-P_{IC} = I_c \cdot V_{cc} \cdot t_{on-Isw} \cdot f_{sw}
+P_{IC} = I_c \cdot V_{cc} \cdot t_{on-Isw} \cdot f_{sw} = 0.08W
 \]
 
 \begin{table}[h]
@@ -156,8 +176,10 @@ Componente                        & \multicolumn{1}{l|}{Pérdida de potencia} & 
 Transistor MOSFET                 & 1.1W                                     & 2.3\%                                  \\ \hline
 Diodo de potencia                 & 2W                                       & 4.2\%                                  \\ \hline
 Controlador PWM                   & 0.08W                                    & 0.2\%                                  \\ \hline
-Resistencias para medir corriente & 1W                                       & 2.1\%                                  \\ \hline
+Resistencias para medir corriente & 1.2W                                       & 2.1\%                                  \\ \hline
 \end{tabular}
 \end{table}
+
+Donde se observa que las mayores pérdidas se dan sobre el diodo en tiempo de conducción.
 
 \end{document}
