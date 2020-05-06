@@ -3,20 +3,127 @@
 \newgeometry{top=2.5cm, bottom=2.0cm, left=2.25cm, right=2.25cm}
 
 \section{Modulación PWM y realimentación}
-\subsection*{a) Valores de $R2$ y $R3$ si $V_o=25 VDC$}
 
-A partir del divisor de tensi\'on y sabiendo que se busca cumplir $V_{FB}=V_{REF}$
-$$V_{FB}=V_{REF}= V_o \cdot \frac{R_3}{R_2+R_3}$$
+\subsection{Amplificador de error}
 
-Suponiendo $R_3=10k \Omega $
+\subsubsection*{a) Valores de $R2$ y $R3$ si $V_o=25 VDC$}
 
-$$R_2=R_3 \cdot \left( \frac{V_o}{V_{REF}} - 1 \right)=90k \Omega $$
+Como $V_{FB}$ es el divisor de tensi\'on de $V_o$ y se busca cumplir $V_{FB}=V_{REF}$, se obtiene:
+
+\begin{equation}
+V_{FB}=V_{REF}= V_o \cdot \frac{R_3}{R_2+R_3}
+\label{ec1.1.a1}
+\end{equation}
 
 
-\subsection*{b) Transferencia  $\frac{ \widetilde{v_c}(s)}{\widetilde{v_o}(s)}$ para pequeñas variaciones} 
+Depejando de la ecuaci\'on \eqref{ec1.1.a1} y suponiendo que $R_3=10k \Omega $, obtenemos:
 
-La transferencia a pequeñas variaciones del amplificador de error es independiente de $V_{REF}$ resultando en un inversor con $Z_1=R_2$ y $Z_2=R_6 + \frac{1}{sC}$
+\begin{equation}
+R_2=R_3 \cdot \left( \frac{V_o}{V_{REF}} - 1 \right)=90k \Omega \label{ec1.1.a2}
+\end{equation}
 
-$$\frac{\widetilde{v_c}(s)}{\widetilde{v_o}(s)}=-\frac{R_6 + \frac{1}{sC} }{R_2}$$
+\subsubsection*{b) Transferencia  $\frac{ \widetilde{v_c}(s)}{\widetilde{v_o}(s)}$ para pequeñas variaciones} 
+
+La transferencia a pequeñas variaciones del amplificador de error se obtiene analizando el inversor con $Z_1=R_2$ y $Z_2=R_6 + \frac{1}{sC}$. Esto se debe a que a pequeñas variaciones, tanto la fuente de tensi\'on V2 como la funete de corriente I1 se pasivan.
+
+\begin{equation}
+\frac{\widetilde{v_c}(s)}{\widetilde{v_o}(s)}=-\frac{R_6 + \frac{1}{s \cdot C_2} }{R_2} = - \frac{R_6}{R_2} \cdot \frac{s+\frac{1}{C_2 \cdot R_6}}{s} \label{ec1.1.b}
+\end{equation}
+
+\subsubsection*{c) Amplificador de error como bloque de un sistema LTI. Ganancia, Polos y Ceros}
+
+Reemplazando los valores num\'ericos de la consigna en ecuaci\'on \eqref{ec1.1.b}, el diagrama en bloque resulta: 
+
+\begin{center}
+\begin{tikzpicture}[
+squarednode/.style={rectangle, draw=black, fill=white!5, ultra thick, minimum size=15mm},
+]
+\draw[ultra thick] (-2,0) -- (2,0);
+\node[squarednode]      (maintopic) {\LARGE {$-\frac{1}{9} \cdot \frac{s+1000}{s}$}};
+\end{tikzpicture}
+\end{center}
+
+
+El amplificador de error cuenta con una ganacia $G_{amp}=\frac{1}{9}$, un polo en $s=-1000$ y un cero en el origen.
+
+
+\subsubsection*{d) Conjunto fuente de corriente I1 y R7}
+
+
+\subsection{Modulaci\'on PWM}
+
+\subsubsection*{a) Caracter\'isticas de la se\~nal triangular}
+\subsubsection*{b) Duty cycle m\'aximo}
+\subsubsection*{c) Modulador PWM como bloque de un sistema LTI.}
+
+
+
+\subsection{Convertidor DC/DC}
+\subsubsection*{a) Funci\'on transferencia del convertidor}
+
+Considerando el diodo y el MOS como ideales, comenzamos analizando el espacio de estados. 
+
+Durante el tiempo que la llave se encuentra cerrada (SW=ON) obtenemos:
+
+\begin{equation*}
+\begin{bmatrix}
+\dot{i_{L_1}} \\
+\dot{V_{C_1}} 
+\end{bmatrix}
+=
+\underbrace{
+\begin{bmatrix}
+{0} & {0}\\
+{0} & {-\frac{1}{R_8 \cdot C_1}} 
+\end{bmatrix}
+}_{A_{on}}
+\begin{bmatrix}
+{i_{L_1}} \\
+{V_{C_1}} 
+\end{bmatrix}
++
+\underbrace{
+\begin{bmatrix}
+{\frac{1}{L_1}} \\
+{0} 
+\end{bmatrix}
+}_{B_{on}}
+V_1
+\end{equation*}
+
+
+\begin{equation*}
+V_o =
+\underbrace{
+\begin{bmatrix}
+{0} & {1} 
+\end{bmatrix}
+}_{C_{on}}
+\begin{bmatrix}
+{i_{L_1}} \\
+{V_{C_1}} 
+\end{bmatrix}
+\end{equation*}
+
+Por otro lado, durante el tiempo que la llave se encuentra abierta (SW=OFF), se obtiene que: 
+
+\begin{equation*}
+A_{off} = 
+\begin{bmatrix}
+{0} & {- \frac{1}{L_1}} \\ 
+{\frac{1}{C}} & {-\frac{1}{R_8 \cdot C_1}}
+\end{bmatrix}  
+\hspace{2cm} B_{off}=B_{on}  
+\hspace{2cm} C_{off} = C_{on}
+\end{equation*}
+
+% Cuales son las Singularidades del sistema?
+\subsubsection*{b) Valor real del Duty cycle}
+
+%Por que es diferente del teorico?
+\subsubsection*{c) Tiempos de establecimiento ante los cambios de carga }
+\subsubsection*{d) Tiempos de establecimiento con $R_6=22k\Omega$ y $R_6=1k\Omega$}
+
+
 
 \end{document}
