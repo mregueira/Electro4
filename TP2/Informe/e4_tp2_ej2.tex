@@ -64,16 +64,16 @@ Se analizarán dos casos: aplicando un escalón de carga (cortocircuitando 2 LED
 \subsubsection*{Perturbaciones en la carga}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Imagenes/Punto2/Carga.PNG}
+\includegraphics[width=0.7\linewidth]{Imagenes/Punto2/cargavariable-I-V.png}
 \caption{Respuesta frente a escalón de carga: $I_o$ (Azul) - $V_{n007}$ es el SW (Rojo) - $V_o$ (Verde)}
 \end{figure}
 
-Al producir el escalón de carga (cuando la tensión en el Sw pasa a 0V), como se tiene la misma tensión en dicho instante para una menor cantidad de LED's ahora, se observa entonces un pico de corriente positivo. Esto es debido a que el aumento de tensión en los LED's se traduce en un aumento exponencial de la corriente, debido a la relación $V_D(I_D)$. A medida que el lazo de realimentación vuelve a llevar la corriente hacia el valor regulado de 2A, la tensión en los LED's restantes disminuye, por lo que la tensión de salida disminuye. 
+Al producir el escalón de carga (cuando la tensión en el Sw pasa a 0V), como se tiene la misma tensión en dicho instante para una menor cantidad de LED's ahora, se observa entonces un pico de corriente positivo. Esto es debido a que el aumento de tensión en los LED's se traduce en un aumento exponencial de la corriente, debido a la relación $V_D(I_D)$. A medida que el lazo de realimentación vuelve a llevar la corriente hacia el valor regulado de 2A, la tensión en los LED's restantes disminuye, por lo que la tensión de salida disminuye. Cuando se vuelven a agregar los 2 LED's, ocurre lo opuesto, es decir, un pico negativo de corriente (casi hasta 0A), dado que la misma tensión sobre más LED's ahora se distribuye, porque dada la relación $V_D(I_D)$ es de esperar que la corriente disminuya. Luego el lazo la lleva al valor regulado de 2A, aumentando en consecuencia la tensión.
 
 \subsubsection*{Perturbaciones en la fuente}
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.8\linewidth]{Imagenes/Punto2/fuentevariable-I-V.PNG}
+\includegraphics[width=0.7\linewidth]{Imagenes/Punto2/fuentevariable-I-V.PNG}
 \caption{Respuesta frente a escalón de tensión: $I_o$ (Azul) - $V_{vcc}$ es la entrada (Rojo) - $V_o$ (Verde)}
 \end{figure}
 
