@@ -65,7 +65,7 @@ Considerando el diodo y el MOS como ideales, comenzamos analizando el espacio de
 
 Durante el tiempo que la llave se encuentra cerrada (SW=ON) obtenemos:
 
-\begin{equation*}
+\begin{equation}
 \begin{bmatrix}
 \dot{i_{L_1}} \\
 \dot{V_{C_1}} 
@@ -89,10 +89,10 @@ Durante el tiempo que la llave se encuentra cerrada (SW=ON) obtenemos:
 \end{bmatrix}
 }_{B_{on}}
 V_1
-\end{equation*}
+\end{equation}
 
 
-\begin{equation*}
+\begin{equation}
 V_o =
 \underbrace{
 \begin{bmatrix}
@@ -103,11 +103,11 @@ V_o =
 {i_{L_1}} \\
 {V_{C_1}} 
 \end{bmatrix}
-\end{equation*}
+\end{equation}
 
 Por otro lado, durante el tiempo que la llave se encuentra abierta (SW=OFF), se obtiene que: 
 
-\begin{equation*}
+\begin{equation}
 A_{off} = 
 \begin{bmatrix}
 {0} & {- \frac{1}{L_1}} \\ 
@@ -115,7 +115,22 @@ A_{off} =
 \end{bmatrix}  
 \hspace{2cm} B_{off}=B_{on}  
 \hspace{2cm} C_{off} = C_{on}
-\end{equation*}
+\end{equation}
+
+
+A continucaci\'on se calcula el promedio ponderado de las matrices de estado:
+
+\begin{equation}
+\overline{A} = A_{on} \cdot d + A_{off} \cdot (1-d) \hspace{2cm} \overline{A}=A_{on} = A_{off}  \hspace{2cm} \overline{B}=B_{on} = B_{off}  
+\end{equation}
+
+Finalmente, utilizando la ecuaci\'on provista por la c\'atedra en la clase de Transferencias y reemplazando los valores obtenidos anteriormente obtenemos la transferencia deseada. 
+
+\begin{equation}
+\frac{ \widetilde{v_o}(s)}{\widetilde{d}(s)}= \overline{C} \cdot (s \cdot I - \overline{A})^{-1} \left[ (A_{on} - A_{off})X(s) + (B_{on} - B_{off}) V_1 \right] +(C_{on} - C_{off})X(s) 
+\label{ec1.3}
+\end{equation}
+
 
 % Cuales son las Singularidades del sistema?
 \subsubsection*{b) Valor real del Duty cycle}
