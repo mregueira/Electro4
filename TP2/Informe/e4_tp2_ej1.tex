@@ -66,25 +66,29 @@ Considerando el diodo y el MOS como ideales, comenzamos analizando el espacio de
 Durante el tiempo que la llave se encuentra cerrada (SW=ON) obtenemos:
 
 \begin{equation}
+\underbrace{
 \begin{bmatrix}
-\dot{i_{L_1}} \\
+\dot{i_{L_1}} \vspace{0.2cm} \\
 \dot{V_{C_1}} 
 \end{bmatrix}
+}_{\dot{X}}
 =
 \underbrace{
 \begin{bmatrix}
-{0} & {0}\\
-{0} & {-\frac{1}{R_8 \cdot C_1}} 
+{0} & {0} \vspace{0.2cm}\\
+{0} & {-\frac{1}{R_L \cdot C_1}} 
 \end{bmatrix}
 }_{A_{on}}
+\underbrace{
 \begin{bmatrix}
-{i_{L_1}} \\
+{i_{L_1}} \vspace{0.2cm}\\
 {V_{C_1}} 
 \end{bmatrix}
+}_{X}
 +
 \underbrace{
 \begin{bmatrix}
-{\frac{1}{L_1}} \\
+{\frac{1}{L_1}} \vspace{0.2cm}\\
 {0} 
 \end{bmatrix}
 }_{B_{on}}
@@ -110,8 +114,8 @@ Por otro lado, durante el tiempo que la llave se encuentra abierta (SW=OFF), se 
 \begin{equation}
 A_{off} = 
 \begin{bmatrix}
-{0} & {- \frac{1}{L_1}} \\ 
-{\frac{1}{C}} & {-\frac{1}{R_8 \cdot C_1}}
+{0} & {- \frac{1}{L_1}} \vspace{0.3cm}\\ 
+{\frac{1}{C}} & {-\frac{1}{R_L \cdot C_1}}
 \end{bmatrix}  
 \hspace{2cm} B_{off}=B_{on}  
 \hspace{2cm} C_{off} = C_{on}
@@ -131,6 +135,30 @@ Finalmente, utilizando la ecuaci\'on provista por la c\'atedra en la clase de Tr
 \label{ec1.3}
 \end{equation}
 
+Donde X(s) es el vector en estado estacionario:
+
+\begin{equation}
+X(s)= 
+\begin{bmatrix}
+{i_{L_1}} \\
+{V_{C_1}} 
+\end{bmatrix}
+=
+\begin{bmatrix}
+{\frac{I_o}{1-d}} \vspace{0.3cm} \\
+{\frac{V_1}{1-d}} 
+\end{bmatrix}
+=
+\begin{bmatrix}
+{\frac{V_1}{R_L(1-d)^2}} \vspace{0.3cm} \\
+{\frac{V_1}{1-d}} 
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\frac{ \widetilde{v_o}(s)}{\widetilde{d}(s)}= 
+\label{ec1.3}
+\end{equation}
 
 % Cuales son las Singularidades del sistema?
 \subsubsection*{b) Valor real del Duty cycle}
