@@ -48,7 +48,7 @@ El amplificador de error cuenta con una ganacia $G_{amp}=\frac{R_6}{R_2} =\frac{
 
 
 \subsubsection*{d) Conjunto fuente de corriente I1 y R7}
-La fuente de corriente $I_1$ genera sobre la resistencia $R_7$ una ca\'ida de tensi\'on que marca el punto de operaci\'on con que queremos trabajar. En el caso del circuito que estamos analizando, esa tensi\'on es $V_{control}=12V$. 
+La fuente de corriente $I_1$ genera sobre la resistencia $R_7$ una ca\'ida de tensi\'on que marca el punto de operaci\'on con que queremos trabajar. En el caso del circuito que estamos analizando, esa tensi\'on es $V_{control}=10k\Omega \cdot 1mA =10V$. 
 
 Cuando se compara $V_{FB}$ con $V_{REF}$ a la entrada del amplificador de error, se obtiene una diferencia. Dicha diferencia es la que nos determina cu\'anto nos movemos del punto de operaci\'on antes mencionado. Se trabaja alrededor de ese punto porque es el que nos determina el duty requerido a la salida.
 
@@ -193,18 +193,37 @@ X(s)=
 
 \begin{equation}
 \frac{ \widetilde{v_o}(s)}{\widetilde{d}(s)}= \frac{V_1}{(d-1)^2} \cdot
- \frac{\frac{(d-1)^2}{L_1 \cdot C_1} -s}{s^2 +\frac{1}{R_L \cdot C_1 } s + \frac{(d-1)^2}{L_1 \cdot C_1}}
+ \frac{ 1 - \frac{L_1}{R_L \cdot (d-1)^2} \cdot s}{ \frac{L_1 \cdot C_1}{(1-d)^2} \cdot s^2 +\frac{L_1}{R_L \cdot (1-d)^2 }\cdot s + 1}
 \end{equation}
 
 El sistema cuenta con dos polos complejos conjugados en el semi-plano izquierdo y un cero real en el semi-plano derecho.
+
+\begin{equation}
+z=\frac{R_L \cdot (d-1)^2}{L_1}
+\end{equation}
+
+
+
+\begin{equation}
+p= - \epsilon \cdot w_n \pm j \cdot w_n \cdot \sqrt{1-{\epsilon}^2 } \hspace{1cm} \left\lbrace
+\begin{array}{ll}
+w_n=\sqrt{\frac{(1-d)^2}{L_1 \cdot C_1}} \vspace{0.2cm} \\
+\epsilon= \frac{1}{2 \cdot w_n \cdot R_L \cdot C_1}
+\end{array}
+\right.
+\end{equation}
+
+
+
+
 \subsubsection*{b) Valor real del Duty cycle}
 
 El valor real de duty cycle es $d_{real}=0.56$ mientras que el ideal es $d_{ideal}= \frac{V_o-V_1}{V_o}=0.6$.
 
-El duty real no coincide con el ideal por el efecto de los componentes reales. 
-Cuando aumentamos la carga, aumenta el valor medio de la corriente de la inductancia, por lo que la ca\'ida de tensi\'on en el diodo es mayor. Del mismo modo, la ca\'ida de tensi\'on en la inductancia tambi\'en aumenta. Sumado a lo anterior, tenemos los efectos de la $ESR_L$. Todo esto contribuye a que la tensi\'on de salida $V_o$ se aleje del valor deseado y el duty te\'orico no sea el requerido en la pr\'actica.
 
-\todo{hay algo que no me cierra aca}
+El duty real no coincide con el ideal por el efecto de los componentes reales. Cuando aumentamos la carga, aumenta el valor medio de la corriente de la inductancia, por lo que la ca\'ida de tensi\'on en el diodo es mayor. Del mismo modo, la ca\'ida de tensi\'on en la inductancia tambi\'en aumenta. Sumado a lo anterior, tenemos los efectos de la $ESR_L$. Todo esto contribuye a que la tensi\'on de salida $V_o$ se aleje del valor deseado y el duty te\'orico no sea el requerido en la pr\'actica.
+
+
 \subsubsection*{c) Tiempos de establecimiento ante los cambios de carga }
 
 \begin{figure}[H]
