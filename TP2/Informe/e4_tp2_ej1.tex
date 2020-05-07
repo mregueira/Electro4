@@ -27,7 +27,7 @@ R_2=R_3 \cdot \left( \frac{V_o}{V_{REF}} - 1 \right)=90k \Omega \label{ec1.1.a2}
 La transferencia a pequeñas variaciones del amplificador de error se obtiene analizando el inversor con $Z_1=R_2$ y $Z_2=R_6 + \frac{1}{sC}$. Esto se debe a que a pequeñas variaciones, tanto la fuente de tensi\'on V2 como la funete de corriente I1 se pasivan.
 
 \begin{equation}
-\frac{\widetilde{v_c}(s)}{\widetilde{v_o}(s)}=-\frac{R_6 + \frac{1}{s \cdot C_2} }{R_2} = - \frac{R_6}{R_2} \cdot \frac{s+\frac{1}{C_2 \cdot R_6}}{s} \label{ec1.1.b}
+\frac{\widetilde{v_c}(s)}{\widetilde{v_o}(s)}=-\frac{R_6 + \frac{1}{s \cdot C_2} }{R_2}  \label{ec1.1.b}
 \end{equation}
 
 \subsubsection*{c) Amplificador de error como bloque de un sistema LTI. Ganancia, Polos y Ceros}
@@ -44,11 +44,13 @@ squarednode/.style={rectangle, draw=black, fill=white!5,thick, minimum size=15mm
 \end{center}
 
 
-El amplificador de error cuenta con una ganacia $G_{amp}=\frac{R_6}{R_2} =\frac{1}{9}$, un polo en $s=-\frac{1}{C_2 \cdot R_6 }=-1000$ y un cero en el origen.
+El amplificador de error cuenta con una ganacia $G_{amp}=\frac{R_6}{R_2} =\frac{1}{9}$, un polo en $f_p=\frac{1}{2 \pi \cdot C_2 \cdot R_6 }=159.15Hz$ y un cero en el origen.
 
 
 \subsubsection*{d) Conjunto fuente de corriente I1 y R7}
+La fuente de corriente $I_1$ genera sobre la resistencia $R_7$ una ca\'ida de tensi\'on que marca el punto de operaci\'on con que queremos trabajar. En el caso del circuito que estamos analizando, esa tensi\'on es $V_{control}=12V$. 
 
+Cuando se compara $V_{FB}$ con $V_{REF}$ a la entrada del amplificador de error, se obtiene una diferencia. Dicha diferencia es la que nos determina cu\'anto nos movemos del punto de operaci\'on antes mencionado. Se trabaja alrededor de ese punto porque es el que nos determina el duty requerido a la salida.
 
 \subsection{Modulaci\'on PWM}
 
@@ -80,7 +82,7 @@ De esta forma, el bloque queda conformado de la siguiente forma:
 
 \begin{center}
 \begin{tikzpicture}[
-squarednode/.style={rectangle, draw=black, fill=white!5,thick, minimum size=15mm},
+squarednode/.style={rectangle, draw=black, fill=white!5,thick, minimum size=10mm},
 ]
 \draw[thick] (-2,0)  node[above] {$V_{control}$} -- (2,0) node[above] {$d$};
 
@@ -157,7 +159,7 @@ A_{off} =
 A continucaci\'on se calcula el promedio ponderado de las matrices de estado:
 
 \begin{equation}
-\overline{A} = A_{on} \cdot d + A_{off} \cdot (1-d) \hspace{2cm} \overline{A}=A_{on} = A_{off}  \hspace{2cm} \overline{B}=B_{on} = B_{off}  
+\overline{A} = A_{on} \cdot d + A_{off} \cdot (1-d) \hspace{2cm} \overline{B}=B_{on} = B_{off}  \hspace{2cm} \overline{C}=C_{on} = C_{off}  
 \end{equation}
 
 Finalmente, utilizando la ecuaci\'on provista por la c\'atedra en la clase de Transferencias y reemplazando los valores obtenidos anteriormente obtenemos la transferencia deseada. 
@@ -197,9 +199,12 @@ X(s)=
 El sistema cuenta con dos polos complejos conjugados en el semi-plano izquierdo y un cero real en el semi-plano derecho.
 \subsubsection*{b) Valor real del Duty cycle}
 
-El valor real de duty cycle
+El valor real de duty cycle es $d_{real}=0.56$ mientras que el ideal es $d_{ideal}= \frac{V_o-V_1}{V_o}=0.6$.
 
-%Por que es diferente del teorico?
+El duty real no coincide con el ideal por el efecto de los componentes reales. 
+Cuando aumentamos la carga, aumenta el valor medio de la corriente de la inductancia, por lo que la ca\'ida de tensi\'on en el diodo es mayor. Del mismo modo, la ca\'ida de tensi\'on en la inductancia tambi\'en aumenta. Sumado a lo anterior, tenemos los efectos de la $ESR_L$. Todo esto contribuye a que la tensi\'on de salida $V_o$ se aleje del valor deseado y el duty te\'orico no sea el requerido en la pr\'actica.
+
+\todo{hay algo que no me cierra aca}
 \subsubsection*{c) Tiempos de establecimiento ante los cambios de carga }
 
 \begin{figure}[H]
