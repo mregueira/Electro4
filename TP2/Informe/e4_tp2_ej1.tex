@@ -11,7 +11,7 @@
 Como $V_{FB}$ es el divisor de tensi\'on de $V_o$ y se busca cumplir $V_{FB}=V_{REF}$, se obtiene:
 
 \begin{equation}
-V_{FB}=V_{REF}= V_o \cdot \frac{R_3}{R_2+R_3}
+V_{FB}=V_{REF}= V_o \cdot \frac{R_3}{R_2+R_3} 
 \label{ec1.1.a1}
 \end{equation}
 
@@ -36,9 +36,9 @@ Reacomodando la ecuaci\'on \eqref{ec1.1.b}, el diagrama en bloque resulta:
 
 \begin{center}
 \begin{tikzpicture}[
-squarednode/.style={rectangle, draw=black, fill=white!5, ultra thick, minimum size=15mm},
+squarednode/.style={rectangle, draw=black, fill=white!5,thick, minimum size=15mm},
 ]
-\draw[ultra thick] (-2,0) -- (2,0);
+\draw[thick] (-3,0) node[above] {$V_{o}$} -- (3,0) node[above] {$V_{control}$};
 \node[squarednode]      (maintopic) {\LARGE {$- \frac{R_6}{R_2} \cdot \frac{s+\frac{1}{C_2 \cdot R_6}}{s}$}};
 \end{tikzpicture}
 \end{center}
@@ -54,35 +54,40 @@ El amplificador de error cuenta con una ganacia $G_{amp}=\frac{R_6}{R_2} =\frac{
 
 
 \subsubsection*{a) Caracter\'isticas de la se\~nal triangular}
-Como podemos observar, la señal triangular que se le inserta en el terminal negativo al amplificador U1 es una señal triangular con un período de 20 $\mu $s (50kHz) y una tensión pico $V_p=19 V$. Posee un tiempo de rise $t_r=19 \mu s$ y un tiempo de caída $t_f=500ns$. Con estos valores, podemos establecer que tiene un duty cicle de: $D_t= \frac{t_r}{T}=0.95$. 
+Como podemos observar, la señal triangular que se le inserta en el terminal negativo al amplificador U1 es una señal triangular con un período de 20 $\mu $s (50kHz) y una tensión pico $V_p=19 V$. Posee un tiempo de rise $t_r=19 \mu s$ y un tiempo de caída $t_f=500ns$. Con estos valores, podemos establecer que tiene un duty cicle de: $d_t= \frac{t_r}{T}=0.95$. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.5\linewidth]{Imagenes/Punto1/triang_shape.png}
-\caption{Diagrama se la señal triangular.}
+\caption{Señal triangular.}
 \end{figure}
 
 \subsubsection*{b) Duty cycle m\'aximo}
 Para obtener el duty cycle máximo que puede obtener CompOut, debemos primero calcular la tensión de la señal triangular en el tiempo. Dicha tensión se puede expresar de la siguiente manera:
 \begin{equation}
-V_{triang}(t)= \frac{V_{maxTriang}}{T_s} * t
+V_{Triang}(t)= \frac{V_{max_{Triang}}}{T_s} \cdot t
 \end{equation} 
-Sabiendo que el duty cycle es $ D=\frac{t}{T_s}$  , y que el máximo duty se da cuando la tensión de la señal triangular es igual a la tensión de saturación del amplificador, por lo que la ecuación queda de la siguiente manera:
+Sabiendo que el duty cycle es $ d=\frac{t}{T_s}$  , y que el máximo duty se da cuando la tensión de la señal triangular es igual a la tensión de saturación del amplificador, por lo que la ecuación queda de la siguiente manera:
 \begin{equation}
-V_{satOpamp}= D*V_{maxtriang} \rightarrow D= \frac{V_{satOpamp}}{V_{maxTriang}}=\frac{15 V}{19V}=0.79
+V_{sat_{Opamp}}= d \cdot V_{maxtriang} \Rightarrow d= \frac{V_{sat_{Opamp}}}{V_{max_{Triang}}}=\frac{15 V}{19V}=0.79
 \end{equation}
 \subsubsection*{c) Modulador PWM como bloque de un sistema LTI.}
-Para modelar el PWM como un bloque de un sistema LTI, primero debemos hallar su transferencia $V_{ComOut}/D$. Partiendo de la ecuación previa de la diente de sierra, podemos despejar el tiempo y, dividiendo por el período de la señal, encontramos la siguiente transferencia:
+Para modelar el PWM como un bloque de un sistema LTI, primero debemos hallar su transferencia $\frac{d}{V_{ComOut}}$. Partiendo de la ecuación previa de la diente de sierra, podemos despejar el tiempo y, dividiendo por el período de la señal, encontramos la siguiente transferencia:
 \begin{equation}
-T_{PWM}(S)=\frac{D}{V_{comOut}}=\frac{1}{V_{maxTriang}}=\frac{1}{19}
+\frac{d}{V_{control}}=\frac{1}{V_{max_{Triang}}}=\frac{1}{19}
 \end{equation} 
 
 De esta forma, el bloque queda conformado de la siguiente forma:
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.5\linewidth]{Imagenes/Punto1/LTI.png}
-\caption{Figura del bloque PWM como sistema LTI.}
-\end{figure}
+\begin{center}
+\begin{tikzpicture}[
+squarednode/.style={rectangle, draw=black, fill=white!5,thick, minimum size=15mm},
+]
+\draw[thick] (-2,0)  node[above] {$V_{control}$} -- (2,0) node[above] {$d$};
+
+\node[squarednode]      (maintopic) {\LARGE {$ \frac{1}{19}$}};
+\end{tikzpicture}
+\end{center}
+
 
 
 \subsection{Convertidor DC/DC}
@@ -192,9 +197,46 @@ X(s)=
 El sistema cuenta con dos polos complejos conjugados en el semi-plano izquierdo y un cero real en el semi-plano derecho.
 \subsubsection*{b) Valor real del Duty cycle}
 
+El valor real de duty cycle
+
 %Por que es diferente del teorico?
 \subsubsection*{c) Tiempos de establecimiento ante los cambios de carga }
-\subsubsection*{d) Tiempos de establecimiento con $R_6=22k\Omega$ y $R_6=1k\Omega$}
+
+\begin{figure}[H]
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth, height=\textwidth]{Imagenes/Punto1/Test_con_R6_1k.jpeg}
+    \caption{ Con $R_6=1k\Omega$}
+    \label{fig:f1}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth, height=\textwidth]{Imagenes/Punto1/Test_con_R6_10k.jpeg}
+    \caption{ Con $R_6=10k\Omega$}
+    \label{fig:f2}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[b]{0.3\textwidth}
+    \includegraphics[width=\textwidth, height=\textwidth]{Imagenes/Punto1/Test_con_R6_22k.jpeg}
+    \caption{ Con $R_6=22k\Omega$}
+    \label{fig:f3}
+  \end{subfigure}
+  \caption{Tiempos de establecimiento ante los cambios de carga}
+\end{figure}
+
+Los tiempos de establecimiento resultantes son: 
+\hspace{0.1cm}
+\begin{equation}
+t_e(R_6=1k\Omega)=3.6 mseg
+\hspace{1cm}
+t_e(R_6=10k\Omega)=4.44 mseg
+\hspace{1cm}
+t_e(R_6=22k\Omega)=18.48 mseg
+\end{equation}
+
+A medida que el cero del amplificador de error se acerca al origen, el tiempo de establecimiento aumenta.  
+
+
+\subsubsection*{d) Diagramas de Bode}
 
 
 
