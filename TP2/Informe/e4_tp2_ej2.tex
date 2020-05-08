@@ -4,25 +4,25 @@
 
 \section{Convertidor Boost para Lámpara LED de potencia}
 
-\subsection*{LED's de Potencia: Efecto de la temperatura - Realimentación}
+\subsection{LED's de Potencia: Efecto de la temperatura - Realimentación}
 De la hoja de datos de OSRAM para el LUW-W5AP, se da la curva de $\Delta V(T)=V_F-V_F(25^{\circ})$, para la corriente $I_F$ máxima de 1400mA. La misma tiene pendiente negativa, es decir, que a mayor temperatura, la tensión en directa sobre el LED disminuye.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.3\linewidth]{Imagenes/Punto2/efectoT.png}
-\includegraphics[width=0.29\linewidth]{Imagenes/Punto2/IF-VF.png}
+\includegraphics[width=0.27\linewidth]{Imagenes/Punto2/efectoT.png}
+\includegraphics[width=0.26\linewidth]{Imagenes/Punto2/IF-VF.png}
 \caption{Efecto de la temperatura en la $V_{LED}$: $\Delta V_F(T_j)$ - Curva de $I_F(V_F)$}
 \end{figure}
 
 Al trabajar con LED's de potencia, es conveniente realimentar la corriente en lugar de la tensión. Esto se debe a que si se produce una perturbación en la carga (es decir, para el caso de la simulación cortocircuitar dos LED's), si se está regulando tensión, caerá más tensión sobre los LED's restantes, por lo que la corriente aumentará, de acuerdo a la curva de $I_F(V_F)$ provista en la hoja de datos. Esto podría llevar a que los LED's se quemen por exceso de potencia.
 
-\subsection*{LED's de Potencia: Variación del Brillo}
+\subsection{LED's de Potencia: Variación del Brillo}
 En el realimentador, el amplificador operacional amplifica la tensión sobre la resistencia sensora de la corriente ($R_2$), de manera de obtener a su salida la tensión de referencia de 2.5V para el LT1241. El lazo de realimentación ajusta la corriente para tener en el Pin 2 (FB) dicho valor de tensión dado que el operacional interno a la entrada se encuentra realimentado negativamente de forma externa con un RC entre su salida y el Pin 2 (que es la entrada inversora). Internamente, la entrada no inversora está a un potencial constante de 2.5V. Como el operacional realimentado negativamente busca llegar a que $V^+ = V^-$, de ahí obtenemos que la entrada del Pin 2 se lleva a 2.5V.\par
 Teniendo esto en cuenta, Se busca en la hoja de datos el valor de corriente para el cual se obtiene la mitad del brillo (para el valor actual de 2A se obtiene el máximo). De acuerdo a la curva provista:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.3\linewidth]{Imagenes/Punto2/Lumen-IF.png}
+\includegraphics[width=0.27\linewidth]{Imagenes/Punto2/Lumen-IF.png}
 \caption{Curva de $\frac{\Phi_V}{\Phi_V(1.4A)}(I_F)$}
 \end{figure}
 
@@ -38,7 +38,7 @@ Sabiendo que a la salida del operacional debe haber 2.5V, se despeja el nuevo va
 \frac{2.5V}{0.07V} = G = 35.7 \longrightarrow R_6 = 34.7K \Omega
 \]
 
-\subsection*{Oscilador - Frecuencia de Switching}
+\subsection{Oscilador - Frecuencia de Switching}
 De la hoja de datos, en la sección de Oscilador, se indica que la frecuencia del LT1241 es el doble que la de switching. Entonces, para tener 75KHz, se buscará en la gráfica de $R_TC_T(f)$ el par de valores de componentes acordes para una frecuencia de 150KHz:
 
 \begin{figure}[H]
@@ -58,8 +58,8 @@ T_{OSC} = t_r + t_d \longrightarrow f_{OSC} = 150KHz
 \[
 f_{SW} = \frac{f_{OSC}}{2} = 75KHz
 \]
-
-\subsection*{Perturbaciones sobre el circuito}
+\newpage
+\subsection{Perturbaciones sobre el circuito}
 Se analizarán dos casos: aplicando un escalón de carga (cortocircuitando 2 LED's), y aplicando un escalón de alimentación (pasando la fuente de entrada de 12V a 15V).
 \subsubsection*{Perturbaciones en la carga}
 \begin{figure}[H]
@@ -81,7 +81,7 @@ En la imagen se muestra que, frente al escalón en la tensión de entrada, un au
 
 \newpage
 
-\subsection*{$\mathbf{I_{PK}(I_O)}$ - Corriente pico en el switch en función de $\mathbf{I_O}$}
+\subsection{$\mathbf{I_{PK}(I_O)}$ - Corriente pico en el switch en función de $\mathbf{I_O}$}
 
 
 Teniendo en cuenta que en un circuito Boost se sabe que la corriente máxima del switch coincide con la corriente máxima en la bobina por ende se puede decir que:
@@ -110,7 +110,7 @@ I_{pk}= \left\{ \begin{array}{lcc}
 Donde el valor máximo y mínimo se obtienen al reemplazar por los valores de dichos componentes, y el duty para el caso analizado. Cuando se limita la corriente se dice que este circuito entra a trabajar en condiciones de falla ('Fault Conditions' según el fabricante), ya sea por un cortocircuito o por un escalón de carga.
 
 
-\subsection*{Función de Blanking}
+\subsection{Función de Blanking}
 
 El problema al que responde esta función es sobre el ruido producido en la entrada $I_{Sense}$, debido a los picos de corriente que ocurren en la conmutación del transistor, como la $I_{rr}$ del diodo. Puede provocar una desviación excesiva en el duty del PWM.\par
 La función de blanking (ubicada a la salida del comparador de $I_{Sense}$) lo que hace es retener la salida de dicho comparador cuando el transistor conmuta, durante un breve período de tiempo fijo. De esta forma se previene el inconveniente anterior sobre el PWM. Esta función evita tener que agregar un filtro en la entrada $I_{Sense}$, que provocaría un mayor tiempo de respuesta en la realimentación de corriente.\par
@@ -118,7 +118,7 @@ El tiempo de blanking es función de la tensión en el pin de feedback (Pin 2). 
 
 \newpage
 
-\subsection*{Eficiencia de la Fuente}
+\subsection{Eficiencia de la Fuente}
 Para obtener el rendimiento de la fuente, se calcula la potencia entregada por la fuente y la potencia de salida:
 
 \[
@@ -132,7 +132,7 @@ Por lo que el rendimiento de la fuente en relación entrada/salida es:
 \[
 \eta \% = 100 \cdot \frac{P_o}{P_i} = 89.2 \%
 \]
-Por lo que el resto de las potencia son las pérdidas en los elementos, a calcular a continuación.\par
+Entonces, el resto de las potencia son las pérdidas en los elementos, a calcular a continuación.\par
 
 Las pérdidas en el transistor se calculan midiendo los tiempos de conmutación, mediante la ecuación:
 

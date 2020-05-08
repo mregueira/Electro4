@@ -24,7 +24,7 @@ R_2=R_3 \cdot \left( \frac{V_o}{V_{REF}} - 1 \right)=90k \Omega \label{ec1.1.a2}
 
 \subsubsection*{b) Transferencia  $\frac{ \widetilde{v_c}(s)}{\widetilde{v_o}(s)}$ para pequeñas variaciones} 
 
-La transferencia a pequeñas variaciones del amplificador de error se obtiene analizando el inversor con $Z_1=R_2$ y $Z_2=R_6 + \frac{1}{s \cdot C_2}$. Esto se debe a que a pequeñas variaciones, tanto la fuente de tensi\'on $V_2$ como la funete de corriente $I_1$ se pasivan.
+La transferencia a pequeñas variaciones del amplificador de error se obtiene analizando el inversor con $Z_1=R_2$ y $Z_2=R_6 + \frac{1}{s \cdot C_2}$. Esto se debe a que a pequeñas variaciones, tanto la fuente de tensi\'on $V_2$ como la fuente de corriente $I_1$ se pasivan.
 
 \begin{equation}
 \frac{\widetilde{v_c}(s)}{\widetilde{v_o}(s)}=-\frac{R_6 + \frac{1}{s \cdot C_2} }{R_2}  \label{ec1.1.b}
@@ -56,7 +56,7 @@ Cuando se compara $V_{FB}$ con $V_{REF}$ a la entrada del amplificador de error,
 
 
 \subsubsection*{a) Caracter\'isticas de la se\~nal triangular}
-Como podemos observar, la señal triangular que se le inserta en el terminal negativo al amplificador U1 es una señal triangular con un período de 20$\mu $s (50kHz) y una tensión pico $V_p=19 V$. Posee un tiempo de rise $t_r=19 \mu s$ y un tiempo de caída $t_f=500ns$. Con estos valores, podemos establecer que tiene un duty cicle de: $d_{Triang}= \frac{t_r}{T}=0.95$. 
+Como podemos observar, la señal que se le inserta en el terminal negativo al amplificador U1 es una señal triangular con un período de 20$\mu $s (50kHz) y una tensión pico $V_p=19 V$. Posee un tiempo de rise $t_r=19 \mu s$ y un tiempo de caída $t_f=500ns$. Con estos valores, podemos establecer que tiene un duty cicle de: $d_{Triang}= \frac{t_r}{T}=0.95$. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.4\linewidth]{Imagenes/Punto1/triang_shape.png}
@@ -215,7 +215,7 @@ w_n=\sqrt{\frac{(1-d)^2}{L_1 \cdot C_1}} \vspace{0.2cm} \\
 
   \begin{figure}[H]
   \centering
-    \includegraphics[scale=0.2]{Imagenes/Punto1/rootlocus_Convertidor.jpeg}
+    \includegraphics[scale=0.4]{Imagenes/Punto1/rootlocus_Convertidor.jpeg}
     \caption{ Mapa de raíces del convertidor Boost}
   \end{figure}
 
