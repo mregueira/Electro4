@@ -88,26 +88,24 @@ Teniendo en cuenta que en un circuito Boost se sabe que la corriente máxima del
 \begin{equation}
 I_{L(max)}=I{pk}=\frac{I_{out}}{1-D}+\frac{V_{in}*D}{2*L*f_s}
 \end{equation}
-Cuyo duty cycle (D) viene dado por:
+Cuyo duty cycle(D) viene dado por:
 \begin{equation}
-D=1-\frac{V_{in}}{V_{o}}
+D=1-\frac{V_{in}}{R_L*I_{out}}
 \end{equation} 
 
-%En donde $R_L$ representa la carga total del circuito que la podemos representar como $R_L=R_{LED}+R_2$ donde $R_2$ es la resistencia utilizada para medir corriente. Dicho esto y reemplazando en las ecuaciones anteriores se llega a la siguiente expresión:
-%\begin{equation}
-%I_{L(max)}=I_{pk}=\frac{I_{out}^2*R_L}{V_{in}}+\frac{V_{in}*\left(\frac{V_{in}}{I_{out}*R_l}\right)}{f_s*2*L}
-%\end{equation}
-
-Notar que depende linealmente de $I_o$, si se considerara que se mantiene $V_o$ constante (con lo que el duty sería constante). No es este el caso, dado que se realiza un control por corriente. Al variar el valor de $I_o$ que prefija el lazo, también cambia la tensión de salida $V_o$ por lo que se modifica el duty, del cual la dependencia no es lineal, sino una mezlca. Frente a un escalón de carga, el lazo reestablece la corriente $I_o$ al valor prefijado, disminuyendo el duty (dado que la tensión cae). Por lo tanto, también disminuye $I_{pk}$.  
+En donde $R_L$ representa la carga total del circuito que la podemos representar como $R_L=R_{LED}+R_2$ donde $R_2$ es la resistencia utilizada para medir corriente. Dicho esto y reemplazando en las ecuaciones anteriores se llega a la siguiente expresión:
+\begin{equation}
+I_{L(max)}=I_{pk}=\frac{I_{out}^2*R_L}{V_{in}}+\frac{V_{in}*\left(\frac{V_{in}}{I_{out}*R_l}\right)}{f_s*2*L}
+\end{equation}
 El valor que puede tomar $I_{out}$ está limitado por el diodo zener que posee el integrado LT1241 utilizado, el cual funciona como clamper de 1V si se excede dicho valor. Segun la datasheet dicha corriente es $I_{pk}=\frac{V}{R4} $ donde  $ 0 \leq V \leq 1V$ lo que establece una corriente máxima de $I_{pk}=\frac{1V}{R4}$. Por lo tanto el valor que tomará la corriente en el switch está determinado de la siguiente manera:
 \[
 I_{pk}= \left\{ \begin{array}{lcc}
-             \frac{I_{out}}{1-D}+\frac{V_{in}*D}{2*L*f_s} &   \textrm{si}  & I_{min}\leq I_{out} \leq I_{max}  \\
+             \frac{I_{out}^2*R_L}{V_{in}}+\frac{V_{in}*\left(\frac{V_{in}}{I_{out}*R_l}\right)}{f_s*L} &   \textrm{si}  & I_{min}\leq I_{out} \leq I_{max}  \\
              \\ \frac{1V}{R4} &  \textrm{caso contrario} \\
              \end{array}
    \right.
 \]   
-Donde el valor máximo y mínimo se obtienen al reemplazar por los valores de dichos componentes, y el duty para el caso analizado. Cuando se limita la corriente se dice que este circuito entra a trabajar en condiciones de falla ('Fault Conditions' según el fabricante), ya sea por un cortocircuito o por un escalón de carga.
+Donde el valor máximo y mínimo se obtienen al reemplazar por los valores de dichos componentes. Cuando se limita la corriente se dice que este circuito entra a trabajar en condiciones de falla ('Fault Conditions' según el fabricante), ya sea por un cortocircuito o por un escalón de carga.
 
 
 \subsection*{Función de Blanking}
