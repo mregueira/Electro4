@@ -24,7 +24,7 @@ R_2=R_3 \cdot \left( \frac{V_o}{V_{REF}} - 1 \right)=90k \Omega \label{ec1.1.a2}
 
 \subsubsection*{b) Transferencia  $\frac{ \widetilde{v_c}(s)}{\widetilde{v_o}(s)}$ para pequeñas variaciones} 
 
-La transferencia a pequeñas variaciones del amplificador de error se obtiene analizando el inversor con $Z_1=R_2$ y $Z_2=R_6 + \frac{1}{sC}$. Esto se debe a que a pequeñas variaciones, tanto la fuente de tensi\'on $V_2$ como la funete de corriente $I_1$ se pasivan.
+La transferencia a pequeñas variaciones del amplificador de error se obtiene analizando el inversor con $Z_1=R_2$ y $Z_2=R_6 + \frac{1}{s \cdot C_2}$. Esto se debe a que a pequeñas variaciones, tanto la fuente de tensi\'on $V_2$ como la funete de corriente $I_1$ se pasivan.
 
 \begin{equation}
 \frac{\widetilde{v_c}(s)}{\widetilde{v_o}(s)}=-\frac{R_6 + \frac{1}{s \cdot C_2} }{R_2}  \label{ec1.1.b}
@@ -39,7 +39,7 @@ Reacomodando la ecuaci\'on \eqref{ec1.1.b}, el diagrama en bloque resulta:
 squarednode/.style={rectangle, draw=black, fill=white!5,thick, minimum size=15mm},
 ]
 \draw[thick] (-3,0) node[above] {$V_{o}$} -- (3,0) node[above] {$V_{control}$};
-\node[squarednode]      (maintopic) {\LARGE {$- \frac{R_6}{R_2} \cdot \frac{s+\frac{1}{C_2 \cdot R_6}}{s}$}};
+\node[squarednode]      (maintopic) {\Large {$- \frac{R_6}{R_2} \cdot \frac{s+\frac{1}{C_2 \cdot R_6}}{s}$}};
 \end{tikzpicture}
 \end{center}
 
@@ -56,7 +56,7 @@ Cuando se compara $V_{FB}$ con $V_{REF}$ a la entrada del amplificador de error,
 
 
 \subsubsection*{a) Caracter\'isticas de la se\~nal triangular}
-Como podemos observar, la señal triangular que se le inserta en el terminal negativo al amplificador U1 es una señal triangular con un período de 20 $\mu $s (50kHz) y una tensión pico $V_p=19 V$. Posee un tiempo de rise $t_r=19 \mu s$ y un tiempo de caída $t_f=500ns$. Con estos valores, podemos establecer que tiene un duty cicle de: $d_t= \frac{t_r}{T}=0.95$. 
+Como podemos observar, la señal triangular que se le inserta en el terminal negativo al amplificador U1 es una señal triangular con un período de 20$\mu $s (50kHz) y una tensión pico $V_p=19 V$. Posee un tiempo de rise $t_r=19 \mu s$ y un tiempo de caída $t_f=500ns$. Con estos valores, podemos establecer que tiene un duty cicle de: $d_{Triang}= \frac{t_r}{T}=0.95$. 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.4\linewidth]{Imagenes/Punto1/triang_shape.png}
@@ -68,12 +68,12 @@ Para obtener el duty cycle máximo que puede obtener CompOut, debemos primero ca
 \begin{equation}
 V_{Triang}(t)= \frac{V_{max_{Triang}}}{T_s} \cdot t
 \end{equation} 
-Sabiendo que el duty cycle es $ d=\frac{t}{T_s}$  , y que el máximo duty se da cuando la tensión de la señal triangular es igual a la tensión de saturación del amplificador, por lo que la ecuación queda de la siguiente manera:
+Sabiendo que el duty cycle es $ d=\frac{t}{T_s}$  , y que el máximo duty se da cuando la tensión de la señal triangular es igual a la tensión de saturación del amplificador, la ecuación queda de la siguiente manera:
 \begin{equation}
-V_{sat_{Opamp}}= d \cdot V_{maxtriang} \Rightarrow d= \frac{V_{sat_{Opamp}}}{V_{max_{Triang}}}=\frac{15 V}{19V}=0.79
+V_{sat_{Opamp}}= d_{max} \cdot V_{maxtriang} \hspace{0.5cm} \Rightarrow  \hspace{0.5cm} d_{max}= \frac{V_{sat_{Opamp}}}{V_{max_{Triang}}}=\frac{15 V}{19V}=0.79
 \end{equation}
 \subsubsection*{c) Modulador PWM como bloque de un sistema LTI.}
-Para modelar el PWM como un bloque de un sistema LTI, primero debemos hallar su transferencia $\frac{d}{V_{ComOut}}$. Partiendo de la ecuación previa de la diente de sierra, podemos despejar el tiempo y, dividiendo por el período de la señal, encontramos la siguiente transferencia:
+Para modelar el PWM como un bloque de un sistema LTI, primero debemos hallar su transferencia $\frac{d}{V_{control}}$. Partiendo de la ecuación previa de la diente de sierra, podemos despejar el tiempo y, dividiendo por el período de la señal, encontramos la siguiente transferencia:
 \begin{equation}
 \frac{d}{V_{control}}=\frac{1}{V_{max_{Triang}}}=\frac{1}{19}
 \end{equation} 
@@ -253,9 +253,10 @@ El tiempo que tarda en establecerse el circuito cuando la llave se abre (disminu
     \label{fig:f3}
   \end{subfigure}
   \caption{Tiempos de establecimiento ante los cambios de carga cuando la llave se abre}
+  \label{osc}
 \end{figure}
 
-Los tiempos de establecimiento resultantes son: 
+Los tiempos de establecimiento resultantes cuando la llave se abre son: 
 \hspace{0.1cm}
 \begin{equation}
 t_e(R_6=1k\Omega)=3.6 mseg
@@ -267,15 +268,18 @@ t_e(R_6=22k\Omega)=18.48 mseg
 
 Para el caso de $R_6=10k\Omega$ tambi\'en se midi\'o el tiempo de establecimiento al 5\% cuando la llave se cierra resultando un 30\% menor a $t_e(R_6=10k\Omega)$. 
 
-A partir de analizar la Figura \ref{fig:f3}, notamos que medida que aumenta $R_6$, el tiempo de establecimiento es mayor. El sistema m\'as amortiguado resulta el de $R_6=1k\Omega$, luego le sigue $R=10k\Omega$ y, finalmente, el sistema de $R_6=22k\Omega$ con un movimiento ligeramente amortiguado. Los motivos por los cuales sucede esto ser\'an explicados acontinuaci\'on en el item d).
+A partir de analizar la Figura \ref{osc}, notamos que medida que aumenta $R_6$, el tiempo de establecimiento es mayor. El sistema m\'as amortiguado resulta el de $R_6=1k\Omega$, luego le sigue $R=10k\Omega$ y, finalmente, el sistema de $R_6=22k\Omega$ con un movimiento ligeramente amortiguado. Los motivos por los cuales sucede esto ser\'an explicados acontinuaci\'on en el item d).
 
 \subsubsection*{d) Diagramas de bode de la ganancia a lazo cerrado }
 
 Una vez obtenida la ganancia a lazo cerrado del sistema en Matlab, procedemos a trazar el diagrama de bode y el diagrama de polos y ceros para los distintos valores de resistencia $R_6$, obteniendo los siguientes resultados:  
   
+  \begin{equation}
+  G_{\: lazo \:  cerrado}= \frac{\frac{ \widetilde{v_o}(s)}{\widetilde{d}(s)}}{1- \frac{ \widetilde{v_o}(s)}{\widetilde{d}(s)} \cdot \frac{\widetilde{v_c}(s)}{\widetilde{v_o}(s)} \cdot \frac{1}{9} }
+  \end{equation}
   
 \begin{figure}[H]
-  \begin{subfigure}[b]{0.4\textwidth}
+  \begin{subfigure}[b]{0.5\textwidth}
     \includegraphics[width=\textwidth, height=\textwidth]{Imagenes/Punto1/bode.png}
     \caption{ Diagrama de Bode de la ganancia a lazo cerrado}
     \label{fig:f12}
@@ -291,6 +295,6 @@ Una vez obtenida la ganancia a lazo cerrado del sistema en Matlab, procedemos a 
   
 A medida que aumentamos $R_6$, estamos aumentando la ganancia proporcional (Ver secci\'on 1.1.c) por lo que los polos del sistema se acercan cada vez m\'as al eje $jw$ haciendo tender el sistema a un sistema cada vez m\'as inestable. Este es el motivo por el cual los tiempos de establecimiento de la secci\'on anterior aumentaban a medida que $R_6$ se hacia m\'as grande. 
 
-A partir del diagrama de bode, notamos que el factor de amortiguamiento aumenta a medida que disminuimos $R_6$, resultando en un sistema cada vez m\'as amortiguado. Por otro lado, el margen de fase nos determina 
+A partir del diagrama de bode, notamos que el factor de amortiguamiento aumenta a medida que disminuimos $R_6$, resultando en un sistema cada vez m\'as amortiguado.
 
 \end{document}
