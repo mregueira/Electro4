@@ -306,31 +306,25 @@ A partir del diagrama de bode, notamos que el factor de amortiguamiento aumenta 
 Por último, vemos el análisis del margen de ganancia y del margen de fase para cada caso:
 \begin{figure}[H]
   \begin{subfigure}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth, height=\textwidth]{Imagenes/Punto1/gain_r1k.png}
-    \caption{ Margen de ganancia y fase para $R=1 k\omega $}
+    \includegraphics[width=\textwidth, height=\textwidth]{Imagenes/Punto1/fotosMarce/r1k.png}
+    \caption{ Margen de ganancia y fase para $R=1 k\Omega $}
     \label{fig:f12}
   \end{subfigure}
   \hfill
   \begin{subfigure}[b]{0.5\textwidth}
-    \includegraphics[width=\textwidth, height=\textwidth]{Imagenes/Punto1/gain_r10k.png}
-    \caption{ Margen de ganancia y fase para $R=10 k\omega $}
+    \includegraphics[width=\textwidth, height=\textwidth]{Imagenes/Punto1/fotosMarce/r10k.png}
+    \caption{ Margen de ganancia y fase para $R=10 k\Omega $}
     \label{fig:f22}
   \end{subfigure}
 	\hfill
   \begin{subfigure}[H] {0.5\textwidth}
   
-    \includegraphics[width=\textwidth, height=\textwidth]{Imagenes/Punto1/gain_r22k.png}
-    \caption{ Margen de ganancia y fase para $R=22 k\omega$ }
+    \includegraphics[width=\textwidth, height=\textwidth]{Imagenes/Punto1/fotosMarce/r22k.png}
+    \caption{ Margen de ganancia y fase para $R=22 k\Omega$ }
       \label{fig:f13}
   \end{subfigure}
 
 \end{figure}
 
-
-   
- 
-
-Como podemos observar, a medida que R6 aumenta, el margen de ganancia va aumentando, variando entre -37,1 dB (para el caso de $R6=1 k\omega$) y -55,6 dB (para el caso de $ R6=22 k\omega$).
-Esto se debe a que cuanto más inestable es el circuito, el margen de ganancia es superior.
-Notamos además que el margen de fase no sufre cambios significativos para el análisis del mismo.
+Como podemos observar, a medida que R6 aumenta, el margen de ganancia va disminuyendo, por lo que el sistema tiende a ser inestable, como se observó en las respuestas temporales. Para los casos de $R_6$ simulados no se llega a dicha condición pero si bastante cerca.
 \end{document}
