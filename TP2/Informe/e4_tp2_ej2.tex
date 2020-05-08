@@ -79,83 +79,42 @@ Al producir el escalón de carga (cuando la tensión en el Sw pasa a 0V), como s
 
 En la imagen se muestra que, frente al escalón en la tensión de entrada, un aumento tanto en la tensión de salida como en la corriente (este último con mayor zoom). Para ambos, el porcentaje de aumento es mucho menor que en el caso de escalón de carga, en particular el de la corriente es solamente de un 5\% de su valor nominal. Como la tensión de salida se mantiene casi estable frente a perturbaciones en la entrada, es de esperar que la corriente, por consiguiente, no varíe en mayor proporción.
 
-
+\newpage
 
 \subsection*{$\mathbf{I_{PK}(I_O)}$ - Corriente pico en el switch en función de $\mathbf{I_O}$}
 
-\newpage
+
 Teniendo en cuenta que en un circuito Boost se sabe que la corriente máxima del switch coincide con la corriente máxima en la bobina por ende se puede decir que:
 \begin{equation}
-I_{L(max)}=I{pk}=\frac{I_{out}}{1-D}+\frac{V_{in}*D}{L*f_s}
+I_{L(max)}=I{pk}=\frac{I_{out}}{1-D}+\frac{V_{in}*D}{2*L*f_s}
 \end{equation}
-Cuyo duty cycle(D) viene determinado de la siguiente manera:
+Cuyo duty cycle(D) viene dado por:
 \begin{equation}
 D=1-\frac{V_{in}}{R_L*I_{out}}
 \end{equation} 
 
-En donde $R_L$ representa la carga total del circuito que la podemos representar de la siguiente manera$R_L=R_{leds}+R_2$ donde $R_2$ es la resistencia utilizada para medir corriente. Dicho esto y reemplazando en las ecuaciones anteriores se llega a la siguiente expresión:
+En donde $R_L$ representa la carga total del circuito que la podemos representar como $R_L=R_{LED}+R_2$ donde $R_2$ es la resistencia utilizada para medir corriente. Dicho esto y reemplazando en las ecuaciones anteriores se llega a la siguiente expresión:
 \begin{equation}
-I_{L(max)}=I_{pk}=\frac{I_{out}^2*R_L}{V_{in}}+\frac{V_{in}*\left(\frac{V_{in}}{I_{out}*R_l}\right)}{f_s*L}
+I_{L(max)}=I_{pk}=\frac{I_{out}^2*R_L}{V_{in}}+\frac{V_{in}*\left(\frac{V_{in}}{I_{out}*R_l}\right)}{f_s*2*L}
 \end{equation}
-El valor que puede tomar $I_{out}$ está limitado por el diodo zener que posee el integrado L1241 utilizado. Segun la datasheet dicha corriente es $I_{pk}=\frac{V}}{R4} $ donde  $ 0 \leq V \leq 1V$ lo que establece una corriente máxima de $I_{pk}=\frac{1V}{R4}$. Por lo tanto el valor que tomará la corriente en el switch está determinado de la siguiente manera:
-
-$I_{pk}$= \left\{ \begin{array}{lcc}
-             \frac{I_{out}^2*R_L}{V_{in}}+\frac{V_{in}*\left(\frac{V_{in}}{I_{out}*R_l}\right)}{f_s*L} &   si  & $I_{min}\leq I_{out} \leq I_{max}$  \\
-             \\ \frac{1V}{R4} &  caso contrario \\
+El valor que puede tomar $I_{out}$ está limitado por el diodo zener que posee el integrado LT1241 utilizado, el cual funciona como clamper de 1V si se excede dicho valor. Segun la datasheet dicha corriente es $I_{pk}=\frac{V}{R4} $ donde  $ 0 \leq V \leq 1V$ lo que establece una corriente máxima de $I_{pk}=\frac{1V}{R4}$. Por lo tanto el valor que tomará la corriente en el switch está determinado de la siguiente manera:
+\[
+I_{pk}= \left\{ \begin{array}{lcc}
+             \frac{I_{out}^2*R_L}{V_{in}}+\frac{V_{in}*\left(\frac{V_{in}}{I_{out}*R_l}\right)}{f_s*L} &   \textrm{si}  & I_{min}\leq I_{out} \leq I_{max}  \\
+             \\ \frac{1V}{R4} &  \textrm{caso contrario} \\
              \end{array}
    \right.
-   
-Donde el valor máximo y mínimo se obtienen al reemplazar por los valores de dichos componentes. Cuando se limita la corriente se dice que este circuito entre a trabajar en condiciones de falla ('Fault Conditions' según el fabricante).
+\]   
+Donde el valor máximo y mínimo se obtienen al reemplazar por los valores de dichos componentes. Cuando se limita la corriente se dice que este circuito entra a trabajar en condiciones de falla ('Fault Conditions' según el fabricante), ya sea por un cortocircuito o por un escalón de carga.
 
-\newpage
-
-De la hoja de datos se tiene que, en general, la corriente pico en el switch es:
-
-\[
-I_{PK} = \frac{V_{Pin1} - 1.4V}{3R_S}
-\]
-
-Donde $R_S$ es la resistencia para el sensado de la corriente en el switch.
-
-Tomando la sección de circuito de la hoja de datos, agregando la realimentación externa:
-
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.8\linewidth]{Imagenes/Punto2/IPK-Circuito.png}
-\caption{Circuito para análisis de $I_{PK}$}
-\end{figure}
-
-Para la frecuencia de switching, se puede considerar el capacitor $C_3$ de baja reactancia, por lo que el circuito con el operacional se puede estudiar como un sumador.\par
-Pasivando la entrada $V_{f}$, se tiene:
-
-\[
-V_{o1} = 2.5V \cdot \left(1+ \frac{10K}{10K}\right) = 5V 
-\]
-
-Pasivando la otra entrada fija de 2.5V:
-
-\[
-V_{o2} = V_{f} \cdot \left(- \frac{10K}{10K} \right) = -V_{f}
-\]
-
-Por lo que $V_{Pin1}$ resulta:
-
-\[
-V_{o} = V_{Pin1} = 5 - V_{f} = 5 - V_{Sens} \cdot G = 5 - G \cdot I_o \cdot R_{SIo}
-\]
-
-Reemplazando en la ecuación de $I_{PK}$ resulta:
-
-\[
-I_{PK} = \frac{3.6V - G \cdot I_o \cdot R_{SIo}}{3R_S}
-\]
-La $R_{SIo}$ en este caso también es de $0.1\Omega$.
 
 \subsection*{Función de Blanking}
 
 El problema al que responde esta función es sobre el ruido producido en la entrada $I_{Sense}$, debido a los picos de corriente que ocurren en la conmutación del transistor, como la $I_{rr}$ del diodo. Puede provocar una desviación excesiva en el duty del PWM.\par
 La función de blanking (ubicada a la salida del comparador de $I_{Sense}$) lo que hace es retener la salida de dicho comparador cuando el transistor conmuta, durante un breve período de tiempo fijo. De esta forma se previene el inconveniente anterior sobre el PWM. Esta función evita tener que agregar un filtro en la entrada $I_{Sense}$, que provocaría un mayor tiempo de respuesta en la realimentación de corriente.\par
 El tiempo de blanking es función de la tensión en el pin de feedback (Pin 2). Para condiciones normales de operación ($V_{FB} = 2.5V$), el tiempo es de 100nS, y disminuye a cero si se lleva a cero dicha tensión. Esto quiere decir que el tiempo de blanking es mínimo cuando se enciende el circuito y durante un cortocircuito en la salida. 
+
+\newpage
 
 \subsection*{Eficiencia de la Fuente}
 Para obtener el rendimiento de la fuente, se calcula la potencia entregada por la fuente y la potencia de salida:
