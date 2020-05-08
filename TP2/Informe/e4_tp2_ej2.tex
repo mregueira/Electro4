@@ -79,7 +79,36 @@ Al producir el escalón de carga (cuando la tensión en el Sw pasa a 0V), como s
 
 En la imagen se muestra que, frente al escalón en la tensión de entrada, un aumento tanto en la tensión de salida como en la corriente (este último con mayor zoom). Para ambos, el porcentaje de aumento es mucho menor que en el caso de escalón de carga, en particular el de la corriente es solamente de un 5\% de su valor nominal. Como la tensión de salida se mantiene casi estable frente a perturbaciones en la entrada, es de esperar que la corriente, por consiguiente, no varíe en mayor proporción.
 
+
+
 \subsection*{$\mathbf{I_{PK}(I_O)}$ - Corriente pico en el switch en función de $\mathbf{I_O}$}
+
+\newpage
+Teniendo en cuenta que en un circuito Boost se sabe que la corriente máxima del switch coincide con la corriente máxima en la bobina por ende se puede decir que:
+\begin{equation}
+I_{L(max)}=I{pk}=\frac{I_{out}}{1-D}+\frac{V_{in}*D}{L*f_s}
+\end{equation}
+Cuyo duty cycle(D) viene determinado de la siguiente manera:
+\begin{equation}
+D=1-\frac{V_{in}}{R_L*I_{out}}
+\end{equation} 
+
+En donde $R_L$ representa la carga total del circuito que la podemos representar de la siguiente manera$R_L=R_{leds}+R_2$ donde $R_2$ es la resistencia utilizada para medir corriente. Dicho esto y reemplazando en las ecuaciones anteriores se llega a la siguiente expresión:
+\begin{equation}
+I_{L(max)}=I_{pk}=\frac{I_{out}^2*R_L}{V_{in}}+\frac{V_{in}*\left(\frac{V_{in}}{I_{out}*R_l}\right)}{f_s*L}
+\end{equation}
+El valor que puede tomar $I_{out}$ está limitado por el diodo zener que posee el integrado L1241 utilizado. Segun la datasheet dicha corriente es $I_{pk}=\frac{V}}{R4} $ donde  $ 0 \leq V \leq 1V$ lo que establece una corriente máxima de $I_{pk}=\frac{1V}{R4}$. Por lo tanto el valor que tomará la corriente en el switch está determinado de la siguiente manera:
+
+$I_{pk}$= \left\{ \begin{array}{lcc}
+             \frac{I_{out}^2*R_L}{V_{in}}+\frac{V_{in}*\left(\frac{V_{in}}{I_{out}*R_l}\right)}{f_s*L} &   si  & $I_{min}\leq I_{out} \leq I_{max}$  \\
+             \\ \frac{1V}{R4} &  caso contrario \\
+             \end{array}
+   \right.
+   
+Donde el valor máximo y mínimo se obtienen al reemplazar por los valores de dichos componentes. Cuando se limita la corriente se dice que este circuito entre a trabajar en condiciones de falla ('Fault Conditions' según el fabricante).
+
+\newpage
+
 De la hoja de datos se tiene que, en general, la corriente pico en el switch es:
 
 \[
