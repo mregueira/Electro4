@@ -216,7 +216,7 @@ w_n=\sqrt{\frac{(1-d)^2}{L_1 \cdot C_1}} \vspace{0.2cm} \\
   \begin{figure}[H]
   \centering
     \includegraphics[scale=0.2]{Imagenes/Punto1/rootlocus_Convertidor.jpeg}
-    \caption{ Singularidades del convertidor Boost}
+    \caption{ Mapa de raíces del convertidor Boost}
   \end{figure}
 
 
@@ -261,11 +261,23 @@ t_e(R_6=10k\Omega)=4.44 mseg
 t_e(R_6=22k\Omega)=18.48 mseg
 \end{equation}
 
-A medida que el cero del amplificador de error se acerca al origen, el tiempo de establecimiento aumenta. En el caso de $R_6=22k\Omega$, el sistema resulta inestable. Mientras que en los otros dos casos, el sistema resulta amortiguado. 
+A medida que el cero del amplificador de error se acerca al origen, el tiempo de establecimiento aumenta. En el caso de $R_6=22k\Omega$, el sistema resulta inestable. Mientras que en los otros dos casos, el sistema resulta amortiguado.  Mirando la constelación de polos, podemos llegar a las mismas conclusiones:
+  \begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.15]{Imagenes/Punto1/polos.png}
+    \caption{ Constelación de polos de la transferencia a lazo cerrado}
+  \end{figure}
+
 
 
 \subsubsection*{d) Diagramas de Bode}
+Una vez obtenida la ganancia a lazo cerrado del sistema, con matlab procedemos a trazar el diagrama de bode para cada valor de la resistencia, obteniendo los siguientes resultados:
+  \begin{figure}[H]
+  \centering
+    \includegraphics[scale=0.2]{Imagenes/Punto1/bode_todos.png}
+    \caption{ Diagramas de bode superpuestos}
+  \end{figure}
 
-
+Como podemos observar, los cambios más significativos los podemos apreciar en la fase, a medida que R se incrementa, la fase comienza a tener cambios más abruptos, hasta eventualmente tener un cambio de 180º, lo que implica que el circuito posee polos en el semiplano derecho y por ende que oscila.
 
 \end{document}
