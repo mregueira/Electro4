@@ -4,12 +4,40 @@
 
 \section{Inverter Monofásico - Medio Puente}
 
-\subsection{Cálculo de $\mathbf{C_{BOOT}}$}
+\subsection{MOS Gate Driver}
 
-\subsection{Análisis Diodo $\mathbf{D_1}$}
+\subsubsection{Cálculo de $\mathbf{C_{BOOT}}$}
 
-\subsection{UVLO: Under Voltage Lock Out}
+Para el cálculo de $C_{BOOT}$, se utiliza la ecuación aproximada de acuerdo a la nota de aplicación AN-978 de International Rectifier:
 
-\subsection{Shoot Through}
+\[
+C_{BOOT} >> \frac{4 \cdot Q_G + 10nC}{V_{CC} - 0.7V}
+\]
+
+Donde en este caso $V_{CC} = 15V$. Para obtener el $Q_G$ (gate charge) del transistor, se procede a medir la $V_{gsIO}$ en el tiempo de encendido, obteniendo un valor $V_{gsIO} = 6.5V$.\par
+En la hoja de datos (Infineon Technologies, Página 7, Gráfico 12), se ingresa a la curva de $V{GS}(Q_G)$, y se obtiene el diferencial de carga $Q_G$ buscado. Con estos datos, se calcula el mínimo valor para $C_{BOOT}$, resultando:
+
+\[
+C_{BOOT} = 7nF
+\]
+\subsubsection{Análisis Diodo $\mathbf{D_1}$}
+
+Midiendo sobre el diodo D1 (RFN1L6S), la tensión máxima en inversa es de 100V. Es decir, la tensión del nodo A más la fuente de alimentación V3 (15V) cuando se enciende el transistor M1. Según el fabricante, el diodo en cuestión soporta en inversa hasta 600V, por lo que está dentro del margen permitido.
+
+\subsubsection{UVLO: Under Voltage Lock Out}
+
+Si la tensión de alimentación cae por debajo de cierto límite, quedando cerca de la tensión de threshold del MOS, podría ocasionar un funcionamiento errático ó incertidumbre en si encenderá o no el transistor.\par
+La función de UVLO monitorea la tensión de alimentación del integrado. Si ésta cae por debajo de 6.15V (de acuerdo al fabricante), los pines BG y TG se conectan a GND, de manera tal que se apagan los dos transistores, evitando el comportamiendo indefinido.\par
+Por ejemplo, si debido al comportamiento indefinido se encendieran ambos transistores a la vez, se produciría una falla de Shoot Through (que se revisa en el siguiente inciso), que puede ser evitada gracias a esta función.
+
+\subsubsection{Shoot Through}
+
+El Shoot Through es una falla que consiste en que ambos transistores se enciendan simultáneamente, provocando un cortocircuito en la alimentación y su posterior destrucción. Para evitar esto, por un lado, el integrado mantiene las salidas de control en fase con el mismo tiempo de propagación, para evitar diferencias de tiempo en el encendido de los transistores. Y por otra parte, se deja un tiempo muerto entre el encendido de ambos transistores. Para ello se utiliza para cada transistor un duty menor al 50\%.
+
+\subsection{Medio Puente - Modulación Cuadrada}
+
+\subsubsection{Análisis de C2 y C3}
+
+\subsubsection{Circulación de corrientes}
 
 \end{document}
