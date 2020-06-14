@@ -33,11 +33,28 @@ Por ejemplo, si debido al comportamiento indefinido se encendieran ambos transis
 \subsubsection{Shoot Through}
 
 El Shoot Through es una falla que consiste en que ambos transistores se enciendan simultáneamente, provocando un cortocircuito en la alimentación y su posterior destrucción. Para evitar esto, por un lado, el integrado mantiene las salidas de control en fase con el mismo tiempo de propagación, para evitar diferencias de tiempo en el encendido de los transistores. Y por otra parte, se deja un tiempo muerto entre el encendido de ambos transistores. Para ello se utiliza para cada transistor un duty menor al 50\%.
-
+\newpage
 \subsection{Medio Puente - Modulación Cuadrada}
 
-\subsubsection{Análisis de C2 y C3}
+\subsubsection{Análisis de $\mathbf{C_2}$ y $\mathbf{C_3}$ - Circulación de corrientes}
 
-\subsubsection{Circulación de corrientes}
+En el nodo entre $C_2$ y $C_3$, se pone una tensión fija correspondiente a $\frac{V_d}{2}$, en este caso son 50V. La circulación de corrientes en los capacitores, tomando el sentido indicado en la figura, se muestran a continuación.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\linewidth]{Imagenes/parte1.png}
+\caption{Inverter Monofásico}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{Imagenes/corrientesC.png}
+\caption{Circulación de corrientes por los capacitores}
+\end{figure}
+
+Cuando se enciende $Q_1$, la corriente circula a través de éste, por el conjunto $L_1 - R_1$ y por $C_2$ cargándolo positivamente, mientras que $C_3$ carga negativamente. Cuando se apaga $Q_1$ y se enciende $Q_2$, ocurre lo opuesto: ahora $C_2$ se carga negativamente y $C_3$ positivamente, manteniendo el valor medio de la corriente de ambos capactiores en 0, y la tensión prácticamente constante en ambos. La corriente en este caso circula a través de $C_3$, por el conjunto $L_1 - R_1$ y por $Q_2$.\par
+A partir de lo anterior, a través de los diodos intrínsecos de los transistores no se tiene circulación de corriente estacionaria.
+
+\todo[inline]{espectro cuadrada y teórico}
 
 \end{document}
