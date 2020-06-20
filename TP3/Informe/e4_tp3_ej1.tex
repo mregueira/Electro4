@@ -63,6 +63,26 @@ x(t) \approx \sum_{k \in \mathbb Z (impar)}^{}X_k \cdot e^{ik\omega_0 t} = \frac
 
 Por lo que los armónicos a visualizar son impares.
 
-\todo[inline]{Ver que de parecido o igual en la fft}
+\begin{figure}[H]
+\centering
+\includegraphics[width=1\linewidth]{Imagenes/fft.png}
+\caption{FFT (Ventana utilizada: Rectangular)}
+\end{figure}
+
+Se muestran los primeros 10 armónicos, de los cuales se indica el valor de los primeros 3, que se comparan con los teóricos en la siguiente tabla:
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+             & Frecuencia & Teórico & Simulado \\ \hline
+Fundamental  & 50KHz      & 50V     & 44.98V   \\ \hline
+1er Armónico & 150KHz     & 15.91V  & 14.96V   \\ \hline
+2do Armónico & 250KHz     & 10.61V  & 8.93V    \\ \hline
+\end{tabular}
+\caption{Tabla comparativa de los 3 primeros armónicos}
+\end{table}
+
+
 
 \end{document}
