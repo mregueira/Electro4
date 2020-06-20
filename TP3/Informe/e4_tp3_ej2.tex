@@ -4,5 +4,39 @@
 
 \section{Inverter Trifásico}
 
+\subsection{Generación PWM y Disparo}
+
+\subsubsection{Overlapping}
+
+Debido a los tiempos de encendido y apagado de los transistores, puede haber un tiempo durante el cual, al conmutar, estén ambos encendidos (de la misma rama del inverter). Una forma de minimizar este tiempo, es proporcionar un camino en Gate a través de un diodo para que el capacitor $C_{gd}$ del MOS se descargue más rápido. Se coloca una resistencia en paralelo para dar un camino a Gate en el encendido, como se muestra en la figura.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{Imagenes/overlap.png}
+\caption{Inverter Trifásico - Minimización de Overlapping}
+\end{figure}
+
+\subsubsection{Generación de señales con $\mathbf{\mu}$P}
+
+Para la generación de las señales de control, tendría una tabla principal (en este caso con 512 puntos), donde se compararía cada punto con el valor actual de la señal triangular generada en paralelo. Siendo 50Hz la frecuencia buscada de recorrido de la tabla, el período es de 20ms, por lo que debería realizarse una comparación cada:
+\[
+t_{COMP}\frac{20m}{512} = 39us \longrightarrow f_{COMP} = \frac{1}{t_{COMP}} = 25.6KHz 
+\]
+Es decir que, por lo menos la frecuencia de clock debe ser de 25.6KHz para recorrer la tabla de la señal de control senoidal. Si la señal triangular se genera también internamente, su frecuencia se sabe que es de $50Hz\cdot m_f$, por lo que la frecuencia de clock mínima considerando esto sería:
+\[
+f_{CLK} = m_f \cdot 25.6KHz
+\]
+Cuando el valor de tabla de la senoidal es mayor al de la triangular, se activa la salida de control del transistor (y su complementario negado). En caso contrario, se apaga.\par
+Para generar las otras dos señales, se utilizarían dos punteros más, que inicien el recorrido de la tabla en otro lugar, de manera que equivalga al defasaje de $120^{\circ}$ entre las señales:
+\[
+\frac{512 \textrm{ Puntos}}{360^{\circ}} = 1.422 \left( \frac{Puntos}{Grado} \right)
+\]
+De forma tal que, para generar las otras 2, tendría que iniciar los dos punteros restantes en el equivalente a $120^{\circ}$ y $240^{\circ}$.\par
+Por lo tanto, el puntero de la primer señal inicia en la posición 0 de la tabla, el puntero de la segunda en la posición 171, y el d ela tercera en la posición 341. 
+
+
+\subsection{Modulación PWM}
+
+\subsection{Motores de inducción Trifásicos}
 
 \end{document}
