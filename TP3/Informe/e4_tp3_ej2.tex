@@ -20,7 +20,7 @@ Debido a los tiempos de encendido y apagado de los transistores, puede haber un 
 
 Para la generación de las señales de control, tendría una tabla principal (en este caso con 512 puntos), donde se compararía cada punto con el valor actual de la señal triangular generada en paralelo. Siendo 50Hz la frecuencia buscada de recorrido de la tabla, el período es de 20ms, por lo que debería realizarse una comparación cada:
 \[
-t_{COMP}\frac{20m}{512} = 39us \Longrightarrow f_{COMP} = \frac{1}{t_{COMP}} = 25.6KHz 
+t_{COMP} = \frac{20ms}{512} = 39us \Longrightarrow f_{COMP} = \frac{1}{t_{COMP}} = 25.6KHz 
 \]
 Es decir que, por lo menos la frecuencia de clock debe ser de 25.6KHz para recorrer la tabla de la señal de control senoidal. Si la señal triangular se genera también internamente, su frecuencia se sabe que es de $50Hz\cdot m_f$, por lo que la frecuencia de clock mínima considerando esto sería:
 \[
@@ -68,13 +68,19 @@ L = 1.15H
 
 \subsubsection{Simulación en el Inverter - Conexión Triángulo}
 
-Para tener una $V_{Linea}$ (que en este caso es igual a la tensión de fase por estar conectado en triángulo) de 230V para realizar la simulación, se despeja el índice de modulación $m_a$ necesario:
+Para tener una $V_{Linea}$ (que en este caso es igual a la tensión de fase por estar conectado en triángulo) de 230V (RMS) para realizar la simulación, se elije un índice de modulación $m_a$ mayor a 1 (es decir, sobremodulando) para no tener que aumentar tanto la tensión $V_d$ y así conseguir más potencia. Tomando $m_a = 1.4$, se estima la $V_d$ necesaria:
 
 \[
-V_{ab} = \frac{\sqrt{3}}{2} \cdot V_d \Longrightarrow m_a = 0.88
+V_{ab} = \frac{1}{2} \cdot m_a \cdot V_d \Longrightarrow V_d = 328V
 \]
 
+El valor anterior se ajustó a 350V para obtener la $I_{Fase}$ buscada (dado que como $m_a > 1$, no estamos en la zona lineal, por lo que no corresponde exactamente al valor mínimo necesario). El valor pico esperado para la $I_{Fase}$ sería $I_{Fase} = 0.72A \cdot \sqrt{2} = 1A$.
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{Imagenes/motorTriangulo.pdf}
+\caption{Tensión de fase y corriente de fase de una rama}
+\end{figure}
 
 
 
