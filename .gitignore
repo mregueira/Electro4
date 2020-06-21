@@ -17,3 +17,5 @@ TP3/Simulacion/Ej 1/Ej2.op.raw
 TP3/Simulacion/Ej 1/Ej2.raw
 TP3/Simulacion/Ej 1/Ej1.net
 TP3/Simulacion/Ej 2/Ej2.raw
+*.raw
+*.fft
