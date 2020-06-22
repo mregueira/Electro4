@@ -8,11 +8,12 @@
 
 \subsubsection{Overlapping}
 
-Debido a los tiempos de encendido y apagado de los transistores, puede haber un tiempo durante el cual, al conmutar, estén ambos encendidos (de la misma rama del inverter). Una forma de minimizar este tiempo, es proporcionar un camino en Gate a través de un diodo para que el capacitor $C_{gd}$ del MOS se descargue más rápido. Se coloca una resistencia en paralelo para dar un camino a Gate en el encendido, como se muestra en la figura.
+Debido a los tiempos de encendido y apagado de los transistores, puede haber un tiempo durante el cual, al conmutar, estén ambos encendidos (de la misma rama del inverter). Esto ocasiona que, durante dicho tiempo se produzca un cortocircuito en la fuente $V_d$, generando un pico de corriente elevado. \par
+Una forma de minimizar este tiempo, es proporcionar un camino en Gate a través de un diodo para que el capacitor $C_{gd}$ del MOS se descargue más rápido. Se coloca una resistencia en paralelo para dar un camino a Gate en el encendido, como se muestra en la figura.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\linewidth]{Imagenes/overlap.png}
+\includegraphics[width=0.5\linewidth]{Imagenes/overlap.png}
 \caption{Inverter Trifásico - Minimización de Overlapping}
 \end{figure}
 
@@ -37,6 +38,60 @@ Por lo tanto, el puntero de la primer señal inicia en la posición 0 de la tabl
 \newpage
 
 \subsection{Modulación PWM}
+
+En este caso se buscar observar que ocurre sobre la carga al variar $m_a$ y $m_f$.
+En el circuito original se tiene que:
+\[
+m_a = 0.5 \hspace{2cm} m_f = 15 \hspace{2cm} I_{Fase} = 8A \hspace{2cm} V_{Fase} = 206V
+\]
+
+\subsubsection{Caso: $\mathbf{m_a = 0.8,1,1.3}$ - $\mathbf{m_f = 15}$}
+Se vuelven a medir la corriente y tensión de fase para los valores propuestos.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.49\linewidth]{Imagenes/Ej2b_V.png}
+\includegraphics[width=0.49\linewidth]{Imagenes/Ej2b_I.png}
+\caption{$V_{Fase}$ e $I_{Fase}$ para el primer caso propuesto}
+\end{figure}
+
+De acuerdo a la expresión para el cálculo de la tensión de línea en la configuración estrella:
+\[
+V_{AB} = \frac{\sqrt{3}}{2} \cdot m_a \cdot V_d
+\]
+Al aumentar $m_a$, aumenta la tensión de línea, lo que resulta en un aumento de la tensión de fase, y consecuentemente de la corriente de fase, como se observa en las figuras.\par
+En este caso, el espectro de la señal de corriente no aporta mayor información a la mencionada, por lo que no se incluye.
+
+\subsubsection{Caso: $\mathbf{m_a = 0.8}$ - $\mathbf{m_f = 15,21,27}$}
+Se vuelven a medir la corriente y tensión de fase para los valores propuestos.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.49\linewidth]{Imagenes/Ej2c_V.png}
+\includegraphics[width=0.49\linewidth]{Imagenes/Ej2c_I.png}
+\caption{$V_{Fase}$ e $I_{Fase}$ para el segundo caso propuesto}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{Imagenes/Ej2cfft.png}
+\caption{Espectro de $I_{Fase}$ para el segundo caso propuesto}
+\end{figure}
+Se verifica por un lado, que al aumentar $m_f$, aumenta la frecuenciade conmutación, lo cual se puede observar en los diferentes gráficos de $V_{Fase}$. En cualquier caso, la componente de frecuencia fundamental se mantiene, dado que depende de la señal de control senoidal, que es la misma en todos los casos.\par
+Por el otro lado, respecto a las señales de $I_{Fase}$ obtenidas, en el tiempo no se logra apreciar demasiado el cambio en los armónicos contenidos, pero si en la figura que muestra el espectro. En ella, se observa como al aumentar $m_f$, efectivamente los armónicos secundarios se desplazan hacia la derecha, lo cual provoca que en la señal en el tiempo cada vez se aprecien menos y se parezca más a una senoidal pura.
+
+\subsubsection{Caso: $\mathbf{m_a = 1.1}$ - $\mathbf{m_f = 33,66,81}$}
+Se vuelven a medir la corriente y tensión de fase para los valores propuestos.
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.49\linewidth]{Imagenes/Ej2d_V.png}
+\includegraphics[width=0.49\linewidth]{Imagenes/Ej2d_I.png}
+\caption{$V_{Fase}$ e $I_{Fase}$ para el tercer caso propuesto}
+\end{figure}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{Imagenes/Ej2dfft.png}
+\caption{Espectro de $I_{Fase}$ para el tercer caso propuesto}
+\end{figure}
+
+En este caso, los resultados son similares al caso anterior, pero se tiene mayor potencia en los primeros armónicos, debido a que se está sobremodulando. Por otra parte, al ser los $m_f$ más grandes que en el caso anterior, los armónicos secundarios están más alejados (y son de menor amplitud). 
 
 \subsection{Motores de inducción trifásicos}
 

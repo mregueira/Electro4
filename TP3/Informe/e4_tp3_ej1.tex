@@ -54,11 +54,11 @@ En el nodo entre $C_2$ y $C_3$, se pone una tensión fija correspondiente a $\fr
 
 Cuando se enciende $Q_1$, la corriente circula a través de éste, por el conjunto $L_1 - R_1$ y por $C_2$ cargándolo positivamente, mientras que $C_3$ carga negativamente. Cuando se apaga $Q_1$ y se enciende $Q_2$, ocurre lo opuesto: ahora $C_2$ se carga negativamente y $C_3$ positivamente, manteniendo el valor medio de la corriente de ambos capactiores en 0, y la tensión prácticamente constante en ambos. La corriente en este caso circula a través de $C_3$, por el conjunto $L_1 - R_1$ y por $Q_2$.\par
 A partir de lo anterior, a través de los diodos intrínsecos de los transistores no se tiene circulación de corriente estacionaria.
-
+\newpage
 De la teoría, la expresión de la Serie de Fourier para una señal cuadrada con simetría impar que oscila entre -A y A es:
 
 \[
-x(t) \approx \sum_{k \in \mathbb Z (impar)}^{}X_k \cdot e^{ik\omega_0 t} = \frac{2A}{ik\pi} \cdot e^{ik2\pi \frac{t}{T}} 
+x(t) \approx \sum_{k \in \mathbb Z (impar)}^{}X_k \cdot e^{ik\omega_0 t} = \sum_{k \in \mathbb Z (impar)}^{} \frac{2A}{ik\pi} \cdot e^{ik2\pi \frac{t}{T}} 
 \]
 
 Por lo que los armónicos a visualizar son impares.
@@ -69,7 +69,7 @@ Por lo que los armónicos a visualizar son impares.
 \caption{FFT (Ventana utilizada: Rectangular)}
 \end{figure}
 
-Se muestran los primeros 10 armónicos, de los cuales se indica el valor de los primeros 3, que se comparan con los teóricos en la siguiente tabla:
+Se muestran los primeros 10 armónicos, de los cuales se indica el valor de los primeros 3, que se comparan con los teóricos (en módulo) en la siguiente tabla:
 
 \begin{table}[ht]
 \centering
