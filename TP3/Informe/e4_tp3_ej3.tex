@@ -11,7 +11,7 @@ Se procedió a analizar el circuito con el cual se realiza un control sobre un m
 En esta etapa, vamos a realizar un análisis sobre el circuito a lazo abierto. Para ello, se dispuso del circuito de la siguiente forma:
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.5\linewidth]{Imagenes/3-1-a-circuito.png}
+\includegraphics[width=0.7\linewidth]{Imagenes/3-1-a-circuito.png}
 \caption{Diagrama del circuito a lazo abierto}
 \end{figure}
 
@@ -50,7 +50,7 @@ Cuando cargamos al motor en el momento en que $I(B)$ sube, lo que ocurre es que 
 
 Cuando la carga es liberada (es decir se deja de drenar corriente), ocurre el efecto opuesto, disminuyendo el torque a cero y aumentando la velocidad angular a la original. Esto ocurre como consecuencia de que siempre mantuvimos el factor $\frac{V}{f}$ constante.
 
-\subsubsection{Interpretación de Variables físicas del Spice}
+\subsubsection{Interpretación de variables físicas del Spice}
 Si bien las variables mencionadas anteriormente fueron obtenidas en tensiones debido a que así es como están modeladas en LTSpice, lo que ocurre es que esos valores de tensión representan unidades del SI. A continuación indicamos cuáles son esas unidades a las que representan:
 
 \begin{table}[H]
@@ -111,12 +111,38 @@ Por otro lado, la corriente de fase tiene un valor de $I_{RMS}=2.59A$ , con pico
 
 \subsection{Análisis a lazo cerrado}
 En esta etapa, vamos a realizar el análisis a lazo cerrado modificando el circuito como se encuentra en la consigna.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{Imagenes/3-2-circuito.png}
+	\caption{Circuito realimentado}
+	\label{fig:torq}
+\end{figure}
+
 Observamos que para cerrar el lazo, lo que tenemos que diseñar es un control PI (proporcional integrativo). La función transferencia de dicho PI es la siguiente:
 
 $$\frac{V_o}{V_i}=-\frac{R_1}{R_2} \cdot \frac{1}{\$ R_1 C + 1} $$
 
+Para lograr una respuesta sobreamortiguada sobre la velocidad angular se seleccionaron los valores:
+
+ $$R1=R2=47k \Omega$$  
+ $$C=4.7\mu$$
+
+\vspace{5cm}
+Al simular con dichos valores de componentes en LTSpice, se obtuvo el siguiente comportamiento del circuito realimentado. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{Imagenes/3-2-subamortiguado.png}
+	\caption{Simulación del circuito realimentado}
+	\label{fig:torq}
+\end{figure}
+
+
+Lo que sucede ahora cuando se aplica el escal\'on de torque es que la velocidad angular cae por aproximadamente 120ms y luego vuelve a restablecerse al valor inicial. Lo mismo sucede cuando el escal\'on de torque cae: la velocidad angular aumenta unos milisegundos hasta que vuelve a su valor original. En ambos casos, lo hace con un comportamiento subamortiguado.  
+\vspace{0.5cm}
+
+Esto ocurre porque el circuito se encuentra realimentado, cuando ocurre un escal\'on de torque, la tensi\'on sobre el motor aumenta por lo que tambi\'en aumenta la frecuencia a la salida del inverter. En otras palabras, lo que esta sucediendo es que se esta corriendo la curva de torque del motor hacia la derecha. 
 
 \end{document}
-
-
 
