@@ -26,7 +26,8 @@ En la figura podemos observar cómo se comportan las señales de frecuencia del 
 \caption{Diagrama temporal del encendido del circuito}
 \end{figure}
 
-Ni bien se enciende el circuito, observamos como la tensión de la línea sube de forma lineal desde 0 a 380V, y de igual manera,suben la frecuencia y la velocidad angular. Cuando aparece el primer $\Delta V_l$ lo que ocurre es que ,gracias a que mantengo el factor $\frac{V}{f}=cte$,el torque sube inmediatamente a su valor máximo, y se mantiene en ese valor hasta que el motor alcanza su velocidad máxima. Cuando el motor alcanza su $\omega_{max}$ el torque disminuye a 0. Observamos que en ese instante, la tensión de línea ya se encuentra en los 380V deseados, y la frecuencia se encuentra constante en 50 V (medidos).
+Ni bien se enciende el circuito, observamos como la tensión de la línea sube de forma lineal desde 0 a 380V, y de igual manera,suben la frecuencia y la velocidad angular. Cuando aparece el primer $\Delta V_l$ lo que ocurre es que ,gracias a que mantengo el factor $\frac{V}{f}=cte$,el torque sube inmediatamente a su valor máximo, y se mantiene en ese valor hasta que el motor alcanza su velocidad máxima. Como el motor es de tipo asincrónico, es fundamental mantener el fcator $\frac{V}{f}$ constante, puesto que si esto no ocurre, el flujo magnético que se forma dentro del motor no es constante, lo que ocasiona que la curva de torque y de velocidad se deformen, y tenga variaciones, desgastando al motor y disminuyendo su vida útil.
+ Cuando el motor alcanza su $\omega_{max}$ el torque disminuye a 0. Observamos que en ese instante, la tensión de línea ya se encuentra en los 380V deseados, y la frecuencia se encuentra constante en 50 V (medidos).
 
 Una vez que tenemos el motor girando a máxima velocidad, mediante el drenaje de una corriente I(B) lo que hacemos es simular una carga que se le coloca al motor. Al aplicar dicha corriente observamos lo siguiente:
 \begin{figure}[H]
@@ -54,4 +55,26 @@ Carga (Torque)    & $kg \cdot m^2$ & 1                 \\ \bottomrule
 \caption{Tabla de interpretación de las unidades tomadas del LTSpice}
 \end{table}
 
+Si analizamos la tensión y corriente de línea obtenemos los siguentes gráficos:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.45\linewidth]{Imagenes/3-1-a-linea.png}
+\includegraphics[width=0.45\linewidth]{Imagenes/3-1-a-lineas.png}
+\caption{Medición de las tensiones y corriente de línea}
+\end{figure}
+
+Podemos observar que la tensión de línea tiene un valor de tensión $V_{RMS}=297.04V$, con picos de tensión de $V_{max}=345 V$ y una tensión $V_{on}=300V$. La corriente, por otro lado, tiene un valor de $I_{RMS}=2.59A$ , con picos de $I_{max}=5.4A$. 
+Las señales se encuentran desfazadas 120º entre sí, y la forma que poseen se debe a la presencia de armónicos, la cual fue configurada para que la fuente entregue una señal con N=2k+1.
+
+\subsection{Análisis a lazo cerrado}
+En esta etapa, vamos a realizar el análisis a lazo cerrado modificando el circuito como se encuentra en la consigna.
+Observamos que para cerrar el lazo, lo que tenemos que diseñar es un control PI. La función transferencia de dicho PI es la siguiente:
+
+$\frac{V_o}{V_i}=-\frac{R_1}{R_2} \cdot \frac{1}{\$ R_1 C + 1} $
+
+
 \end{document}
+
+
+
