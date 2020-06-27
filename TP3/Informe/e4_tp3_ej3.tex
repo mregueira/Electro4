@@ -74,7 +74,7 @@ Los valores en el sistema SI de unidades que opera el motor sin carga:
 \cline{5-6}
 \multicolumn{4}{c|}{}                    & Valor & Unidad \\ \hline
 \multicolumn{4}{|c|}{Velocidad Angular} & 9420  & rpm    \\ \hline
-\multicolumn{4}{|c|}{Torque}            & 2.1   & $kg \cdot m^2$    \\ \hline
+\multicolumn{4}{|c|}{Torque}            & 2.1   & $m \cdot kgf \cdot m^2$    \\ \hline
 \multicolumn{4}{|c|}{Frecuencia}        & 50    & Hz     \\ \hline
 \multicolumn{4}{|c|}{Tensi\'on}           & 380   & V      \\ \hline
 \end{tabular}
@@ -119,30 +119,67 @@ En esta etapa, vamos a realizar el análisis a lazo cerrado modificando el circu
 	\label{fig:torq}
 \end{figure}
 
-Observamos que para cerrar el lazo, lo que tenemos que diseñar es un control PI (proporcional integrativo). La función transferencia de dicho PI es la siguiente:
 
-$$\frac{V_o}{V_i}=-\frac{R_1}{R_2} \cdot \frac{1}{\$ R_1 C + 1} $$
+Observamos al cerrar el lazo, lo que tenemos que diseñar es un control PI (proporcional integrativo). La función transferencia de dicho PI es la siguiente:
 
-Para lograr una respuesta sobreamortiguada sobre la velocidad angular se seleccionaron los valores:
+$$\frac{V_o}{V_i}=-\frac{R_1}{R_2} \cdot \frac{1}{\$ R_1 C_2 + 1} $$
 
- $$R1=R2=47k \Omega$$  
- $$C=4.7\mu$$
+\vspace{0.5cm}
 
-\vspace{5cm}
-Al simular con dichos valores de componentes en LTSpice, se obtuvo el siguiente comportamiento del circuito realimentado. 
+\subsection{Comportamiento de la velocidad angular}
+
+Manteniendo $C2=4.7\mu F$ , se simul\'o la velocidad angular para distintos valores de resistencia $R1=R2$. De esta forma, obtuvimos tres comportamientos distintos:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{Imagenes/3-distintosR.png}
+	\caption{Simulación del circuito realimentado para distintas R1=R2}
+	\label{fig:distintos_r}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|l|l|l|c|c|}
+\hline
+\multicolumn{4}{|c|}{Señal} & Valor de R1=R2 & Comportamiento                          \\ \hline
+\multicolumn{4}{|c|}{Verde} & 4.7k           & No llega a regular la velocidad angular \\ \hline
+\multicolumn{4}{|c|}{Azul}  & 47k            & Velocidad angular subamortiguada      \\ \hline
+\multicolumn{4}{|c|}{Roja}  & 500k           & Velocidad angular sobreamortiguada        \\ \hline
+\end{tabular}
+\end{table}
+
+
+\vspace{0.5cm}
+Al simular con los valores de componentes obtenidos para una respuesta subamortiguada, se obtuvo el siguiente comportamiento del circuito realimentado. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\linewidth]{Imagenes/3-2-subamortiguado.png}
 	\caption{Simulación del circuito realimentado}
-	\label{fig:torq}
+	\label{fig:comportamiento}
 \end{figure}
 
 
-Lo que sucede ahora cuando se aplica el escal\'on de torque es que la velocidad angular cae por aproximadamente 120ms y luego vuelve a restablecerse al valor inicial. Lo mismo sucede cuando el escal\'on de torque cae: la velocidad angular aumenta unos milisegundos hasta que vuelve a su valor original. En ambos casos, lo hace con un comportamiento subamortiguado.  
+Lo que sucede ahora cuando se aplica el escal\'on de torque es que la velocidad angular cae por aproximadamente 120ms y luego vuelve a restablecerse al valor inicial. Lo mismo sucede cuando el escal\'on de torque cae: la velocidad angular aumenta por algunos milisegundos hasta que vuelve a su valor original. En ambos casos, lo hace con un comportamiento subamortiguado.  
 \vspace{0.5cm}
 
-Esto ocurre porque el circuito se encuentra realimentado, cuando ocurre un escal\'on de torque, la tensi\'on sobre el motor aumenta por lo que tambi\'en aumenta la frecuencia a la salida del inverter. En otras palabras, lo que esta sucediendo es que se esta corriendo la curva de torque del motor hacia la derecha. 
+Esto ocurre porque el circuito se encuentra realimentado y, cuando ocurre un escal\'on de torque, la tensi\'on sobre el motor aumenta junto con la frecuencia a la salida del inverter para mantener el factor $\frac{V}{f}$ constante. En otras palabras, lo que esta sucediendo es que se esta corriendo la curva de torque del motor hacia la derecha. 
+
+\vspace{0.5cm}
+
+\subsection{Torque m\'aximo del sistema para un comportamiento sobreamortiguado de la velocidad angular}
+
+El escal\'on de torque m\'aximo se da con un escal\'on de corriente B1 de 20A. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{Imagenes/3-torquemax.png}
+	\caption{Simulación del torque m\'aximo}
+	\label{fig:torqmax}
+\end{figure}
+
+
+
 
 \end{document}
 
