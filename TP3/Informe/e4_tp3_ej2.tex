@@ -8,7 +8,7 @@
 
 \subsubsection{Overlapping}
 
-Debido a los tiempos de encendido y apagado de los transistores, puede haber un tiempo durante el cual, al conmutar, estén ambos encendidos (de la misma rama del inverter). Esto ocasiona que, durante dicho tiempo se produzca un cortocircuito en la fuente $V_d$, generando un pico de corriente elevado. \par
+Debido a los tiempos de encendido y apagado de los transistores, puede haber un tiempo durante el cual, al conmutar, estén ambos encendidos (de la misma rama del inverter). Esto ocasiona que, durante dicho tiempo se produzca un cortocircuito en la fuente $V_d$, generando un pico de corriente elevado, que es lo que se observó sobr el transistor $M_2$. \par
 Una forma de minimizar este tiempo, es proporcionar un camino en Gate a través de un diodo para que el capacitor $C_{gd}$ del MOS se descargue más rápido. Se coloca una resistencia en paralelo para dar un camino a Gate en el encendido, como se muestra en la figura.
 
 \begin{figure}[H]
@@ -65,26 +65,42 @@ En este caso, el espectro de la señal de corriente no aporta mayor información
 Se vuelven a medir la corriente y tensión de fase para los valores propuestos.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.49\linewidth]{Imagenes/Ej2c_V.png}
-\includegraphics[width=0.49\linewidth]{Imagenes/Ej2c_I.png}
-\caption{$V_{Fase}$ e $I_{Fase}$ para el segundo caso propuesto}
+\includegraphics[width=0.48\linewidth]{Imagenes/Ej2c_V.png}
+\caption{$V_{Fase}$ para el segundo caso propuesto}
 \end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\linewidth]{Imagenes/Ej2c_I.png}
+\caption{$I_{Fase}$ para el segundo caso propuesto}
+\end{figure}
+
+
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\linewidth]{Imagenes/Ej2cfft.png}
 \caption{Espectro de $I_{Fase}$ para el segundo caso propuesto}
 \end{figure}
-Se verifica por un lado, que al aumentar $m_f$, aumenta la frecuenciade conmutación, lo cual se puede observar en los diferentes gráficos de $V_{Fase}$. En cualquier caso, la componente de frecuencia fundamental se mantiene, dado que depende de la señal de control senoidal, que es la misma en todos los casos.\par
+Se verifica por un lado, que al aumentar $m_f$, aumenta la frecuencia de conmutación, lo cual se puede observar en los diferentes gráficos de $V_{Fase}$. En cualquier caso, la componente de frecuencia fundamental se mantiene, dado que depende de la señal de control senoidal, que es la misma en todos los casos.\par
 Por el otro lado, respecto a las señales de $I_{Fase}$ obtenidas, en el tiempo no se logra apreciar demasiado el cambio en los armónicos contenidos, pero si en la figura que muestra el espectro. En ella, se observa como al aumentar $m_f$, efectivamente los armónicos secundarios se desplazan hacia la derecha, lo cual provoca que en la señal en el tiempo cada vez se aprecien menos y se parezca más a una senoidal pura.
+
+\newpage
 
 \subsubsection{Caso: $\mathbf{m_a = 1.1}$ - $\mathbf{m_f = 33,66,81}$}
 Se vuelven a medir la corriente y tensión de fase para los valores propuestos.
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.49\linewidth]{Imagenes/Ej2d_V.png}
-\includegraphics[width=0.49\linewidth]{Imagenes/Ej2d_I.png}
-\caption{$V_{Fase}$ e $I_{Fase}$ para el tercer caso propuesto}
+\includegraphics[width=0.8\linewidth]{Imagenes/Ej2d_V.png}
+\caption{$V_{Fase}$ para el tercer caso propuesto}
 \end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.6\linewidth]{Imagenes/Ej2d_I.png}
+\caption{$I_{Fase}$ para el tercer caso propuesto}
+\end{figure}
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.9\linewidth]{Imagenes/Ej2dfft.png}
@@ -105,7 +121,7 @@ Tomando en cuenta la conexión en triángulo:
 \caption{Motor asicrónico trifásico de inducción - Conexión triángulo}
 \end{figure}
 
-De la placa se obtiene que $V_{Fase} = 230V$, y la $I_{Fase} = 0.42A$. Dado el $cos(\phi) = 0.75$, se obtiene la fase $\phi = 41^{\circ}$. Se calcula entonces las impedancias a usar como modelo:
+De la placa se obtiene que $V_{Fase} = 230V$, y la $I_{Fase} = 0.42A$. Dado el $cos(\phi) = 0.75$, se obtiene la fase $\phi = 44^{\circ}$. Se calcula entonces las impedancias a usar como modelo:
 
 \[
 Z = \frac{|V_{Fase}|}{|I_{Fase}|} \phase{44^{\circ}} = 547.6\Omega \phase{44^{\circ}} = 410 \Omega + j362 \Omega

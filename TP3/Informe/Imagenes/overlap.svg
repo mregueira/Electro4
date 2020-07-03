@@ -24,11 +24,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="270.71213"
-     inkscape:cy="149.40929"
+     inkscape:zoom="0.98994949"
+     inkscape:cx="374.79831"
+     inkscape:cy="-15.881926"
      inkscape:document-units="mm"
-     inkscape:current-layer="g1432"
+     inkscape:current-layer="g4744"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1001"
@@ -133,7 +133,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -294,13 +294,15 @@
     </g>
   </g>
   <g
-     transform="translate(-51.378707,-27.020757)"
+     transform="rotate(-180,79.310646,76.489621)"
      inkscape:label="diode"
      id="g4744"
      inkscape:export-xdpi="600"
      inkscape:export-ydpi="600">
     <g
-       id="g4736">
+       id="g4736"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
       <path
          inkscape:connector-curvature="0"
          d="M 80,90 H 99"
@@ -340,7 +342,9 @@
        word-spacing="normal"
        ns0:text=" $D_g$"
        ns0:preamble="C:\\Program Files\\Inkscape\\share\\extensions/textextLib/CircuitSymbolsLatexPreamble.tex"
-       transform="matrix(0.739645,0,0,-0.739645,-64.844681,601.53207)">
+       transform="matrix(-0.739645,0,0,0.739645,274.84468,-424.50574)"
+       inkscape:export-xdpi="600"
+       inkscape:export-ydpi="600">
 <path
    inkscape:connector-curvature="0"
    d="m 225.02,707.9 -0.01,-0.04 -0.01,-0.03 -0.01,-0.03 -0.01,-0.03 -0.01,-0.03 -0.01,-0.03 -0.01,-0.02 -0.01,-0.03 -0.01,-0.02 -0.01,-0.02 -0.01,-0.02 -0.02,-0.02 -0.01,-0.02 -0.02,-0.01 -0.02,-0.02 -0.02,-0.01 -0.02,-0.01 -0.03,-0.01 -0.02,-0.01 -0.03,-0.01 -0.04,-0.01 h -0.01 l -0.02,-0.01 h -0.02 -0.02 l -0.02,-0.01 h -0.02 -0.02 -0.02 l -0.03,-0.01 h -0.02 -0.03 -0.02 -0.03 -0.03 -0.03 -0.03 l -0.03,-0.01 h -0.03 -0.03 -0.04 -0.03 -0.04 c -0.17,0 -0.28,0 -0.28,-0.19 0,-0.11 0.09,-0.11 0.28,-0.11 h 3.3 l -0.18,0.3 h -1.13 c -0.14,0 -0.15,0 -0.22,0.01 -0.09,0.01 -0.12,0.02 -0.12,0.1 0,0.03 0,0.05 0.04,0.23 l 1.37,5.45 c 0.09,0.35 0.11,0.38 0.54,0.38 h 1.07 c 0.97,0 1.8,-0.52 1.8,-1.84 0,-0.48 -0.2,-2.11 -1.04,-3.21 -0.29,-0.36 -1.08,-1.12 -2.31,-1.12 l 0.18,-0.3 c 2.08,0 4.04,2.09 4.04,4.27 0,1.4 -0.85,2.51 -2.34,2.51 h -3.35 c -0.19,0 -0.3,0 -0.3,-0.19 0,-0.12 0.09,-0.12 0.29,-0.12 0.13,0 0.3,-0.01 0.42,-0.02 0.16,-0.02 0.22,-0.05 0.22,-0.16 0,-0.04 -0.01,-0.07 -0.04,-0.19 z"
@@ -463,7 +467,9 @@
   <g
      id="g1432"
      transform="rotate(-180,140.22582,68.049556)"
-     inkscape:label="GND">
+     inkscape:label="GND"
+     inkscape:export-xdpi="600"
+     inkscape:export-ydpi="600">
     <g
        id="g1418"
        inkscape:label="GND"
